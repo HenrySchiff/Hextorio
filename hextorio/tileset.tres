@@ -1,0 +1,21 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://co3wkd23dpolk"]
+
+[ext_resource type="Texture2D" uid="uid://v8vtp0jlh5qn" path="res://red_hexagon.png" id="1_b3und"]
+[ext_resource type="Texture2D" uid="uid://dvyjilo88uxek" path="res://hexagon.png" id="2_yhc64"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kbyhk"]
+texture = ExtResource("1_b3und")
+texture_region_size = Vector2i(64, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hjf16"]
+texture = ExtResource("2_yhc64")
+texture_region_size = Vector2i(64, 74)
+0:0/0 = 0
+
+[resource]
+tile_shape = 3
+tile_layout = 2
+tile_size = Vector2i(64, 74)
+sources/1 = SubResource("TileSetAtlasSource_hjf16")
+sources/0 = SubResource("TileSetAtlasSource_kbyhk")

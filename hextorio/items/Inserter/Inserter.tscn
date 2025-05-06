@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://blec068kwjvq8"]
+
+[ext_resource type="PackedScene" uid="uid://ov1w6ikcgm4f" path="res://items/Inserter/InserterShape.tscn" id="1_g7d5q"]
+[ext_resource type="Script" path="res://items/Inserter/inserter.gd" id="1_mhi0s"]
+
+[node name="Inserter" type="Node2D"]
+script = ExtResource("1_mhi0s")
+
+[node name="InserterShape" parent="." instance=ExtResource("1_g7d5q")]

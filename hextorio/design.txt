@@ -1,0 +1,47 @@
+Entity extends Node2D
+| item_type: ItemType
+| logic_components: [LogicComponent] // children of entity node
+
+Shape extends Node2D
+| 
+
+LogicComponent extends Node
+
+Item extends Node2D
+| item_type: ItemType
+
+ItemType extends Resource
+| shape: Shape
+| entity_scene: PackedScene
+| recipe: Recipe
+
+Recipe extends Resource
+| inputs: [ItemType]
+| quantity: int
+| craft_time: float
+
+
+### Example ###
+
+TransportBelt extends Entity
+| item_type: TransportBeltType
+
+
+Entities are instantiated, exist on the tilemap, and perform logic. Items represent uninstantiated entities. They exist within the world, e.g. on belts or in assemblers, or in the player's inventory. Entities and items are both rendered with the same shape, but items appear smaller and aren't animated.
+
+Logic: scenes and scripts that handle automation / move items around.
+- Transport Lines move items. They belong to TransportBelts, UndergroundTransportBelts, and Splitters.
+- Containers (or some better name) hold items. Inventory, chests, etc.
+- Crafters hold a reference to two containers: an input and output container. They take items in the input container, and according to some recipe, convert them into items that appear in the output container. Crafters belong to Assembler, Furnaces, etc.
+
+
+Example:
+
+class_name TransportBelt extends Entity
+var shape = $TransportBeltShape
+var left_lane = $LeftTransportLine
+var right_lane = $RightTransportLine
+
+class_name TransportBeltShape extends Shape
+
+class_name Item

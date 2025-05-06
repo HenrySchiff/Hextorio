@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuo178apinhw6"]
+
+[ext_resource type="Script" path="res://Items/TransportBelt/transport_belt_icon.gd" id="1_5newf"]
+
+[sub_resource type="Curve2D" id="Curve2D_s3nog"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[node name="TransportBeltIcon" type="Line2D"]
+points = PackedVector2Array(-32, 0, 32, 0)
+width = 32.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+script = ExtResource("1_5newf")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_s3nog")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-32, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="Path2D/PathFollow2D"]
+position = Vector2(-16, 0)
+rotation = 3.14159
+color = Color(0.809523, 0.809524, 0, 1)
+polygon = PackedVector2Array(-7.99998, -8.00002, -8.00002, 7.99998, -24, -6.08444e-05)
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Path2D"]
+visible = false
+position = Vector2(32, 0)
+progress = 64.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="Path2D/PathFollow2D2"]
+position = Vector2(-8, 0)
+color = Color(0.809523, 0.809524, 0, 1)
+polygon = PackedVector2Array(4.99853, -7.99997, 4.99845, 8.00003, 12.9985, 6.59071e-05)

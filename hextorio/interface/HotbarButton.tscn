@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0ho2nutoci28"]
+
+[ext_resource type="StyleBox" uid="uid://bjo4gx7uhihm4" path="res://interface/selected_button_style.tres" id="1_4x80y"]
+[ext_resource type="Script" path="res://interface/hotbar_button.gd" id="1_kaapv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vwaf5"]
+
+[node name="HotBarButton" type="Button"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 8.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_styles/hover_pressed = ExtResource("1_4x80y")
+theme_override_styles/hover = ExtResource("1_4x80y")
+theme_override_styles/pressed = ExtResource("1_4x80y")
+theme_override_styles/normal = ExtResource("1_4x80y")
+icon = SubResource("ViewportTexture_vwaf5")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("1_kaapv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(64, 64)
+render_target_update_mode = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

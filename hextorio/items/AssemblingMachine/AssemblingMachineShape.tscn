@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://twrhg1cpk7nb"]
+
+[ext_resource type="Script" path="res://items/AssemblingMachine/assembling_machine_shape.gd" id="1_tawv7"]
+
+[node name="Polygon2D" type="Polygon2D"]
+scale = Vector2(0.95, 0.95)
+polygon = PackedVector2Array(-58, -68, -32, -84, 0, -66, 33, -84, 58, -70, 58, -33, 89, -14, 89, 15, 59, 34, 59, 71, 32, 87, 0, 68, -32, 86, -58, 71, -58, 34, -90, 16, -90, -14, -58, -33)
+script = ExtResource("1_tawv7")

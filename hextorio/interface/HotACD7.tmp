@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ho2nutoci28"]
+
+[ext_resource type="Script" path="res://interface/hotbar_button.gd" id="1_kaapv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vwaf5"]
+
+[node name="HotBarButton" type="Button"]
+custom_minimum_size = Vector2(80, 0)
+offset_right = 80.0
+offset_bottom = 80.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = SubResource("ViewportTexture_vwaf5")
+script = ExtResource("1_kaapv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(64, 64)
+render_target_update_mode = 1

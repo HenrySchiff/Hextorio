@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3hrb4wlsklu7"]
+
+[ext_resource type="Script" path="res://items/TransportBelt/transport_belt.gd" id="1_cwk5p"]
+[ext_resource type="PackedScene" uid="uid://c3r2ieij50lmm" path="res://items/TransportBelt/TransportBeltShape.tscn" id="2_jjyfs"]
+[ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic/TransportLine.tscn" id="3_ox3t2"]
+
+[node name="TransportBelt" type="Node2D"]
+rotation = -6.28319
+script = ExtResource("1_cwk5p")
+
+[node name="TransportBeltShape" parent="." instance=ExtResource("2_jjyfs")]
+
+[node name="LeftTransportLine" parent="." instance=ExtResource("3_ox3t2")]
+
+[node name="RightTransportLine" parent="." instance=ExtResource("3_ox3t2")]

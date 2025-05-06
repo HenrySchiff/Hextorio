@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3hrb4wlsklu7"]
+
+[ext_resource type="Script" path="res://Items/TransportBelt/transport_belt.gd" id="1_gil0t"]
+[ext_resource type="PackedScene" uid="uid://cuo178apinhw6" path="res://Items/TransportBelt/transport_belt_icon.tscn" id="2_uojf6"]
+
+[node name="TransportBelt" type="Node2D"]
+rotation = -6.28319
+script = ExtResource("1_gil0t")
+
+[node name="TransportBeltIcon" parent="." instance=ExtResource("2_uojf6")]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuo178apinhw6"]
+
+[ext_resource type="Script" path="res://Items/TransportBelt/transport_belt_icon.gd" id="1_5newf"]
+
+[sub_resource type="Curve2D" id="Curve2D_px5wg"]
+
+[node name="TransportBeltIcon" type="Line2D"]
+points = PackedVector2Array(-32, 0, 32, 0)
+width = 32.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+script = ExtResource("1_5newf")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_px5wg")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(8, -56)
+rotation = 3.14159
+color = Color(0.809523, 0.809524, 0, 1)
+polygon = PackedVector2Array(32, -64, 32, -48, 16, -56)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(40, -56)
+rotation = 3.14159
+color = Color(0.809523, 0.809524, 0, 1)
+polygon = PackedVector2Array(32, -64, 32, -48, 16, -56)
