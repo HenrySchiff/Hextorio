@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d20l7r60ye42d"]
 
 [ext_resource type="PackedScene" uid="uid://twrhg1cpk7nb" path="res://items/AssemblingMachine/AssemblingMachineShape.tscn" id="1_nfxbq"]
-[ext_resource type="Script" path="res://items/AssemblingMachine/assembling_machine.gd" id="1_pkpfn"]
+[ext_resource type="Script" uid="uid://spvcte1ttqc5" path="res://items/AssemblingMachine/assembling_machine.gd" id="1_pkpfn"]
 
 [node name="AssemblingMachine" type="Node2D"]
 script = ExtResource("1_pkpfn")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0ho2nutoci28"]
 
 [ext_resource type="StyleBox" uid="uid://bjo4gx7uhihm4" path="res://interface/selected_button_style.tres" id="1_4x80y"]
-[ext_resource type="Script" path="res://interface/hotbar_button.gd" id="1_kaapv"]
+[ext_resource type="Script" uid="uid://bhx3go61lw74u" path="res://interface/hotbar_button.gd" id="1_kaapv"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vwaf5"]
 

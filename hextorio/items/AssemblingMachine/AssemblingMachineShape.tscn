@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://twrhg1cpk7nb"]
 
-[ext_resource type="Script" path="res://items/AssemblingMachine/assembling_machine_shape.gd" id="1_tawv7"]
+[ext_resource type="Script" uid="uid://5f7vfldldu1t" path="res://items/AssemblingMachine/assembling_machine_shape.gd" id="1_tawv7"]
 
 [node name="Polygon2D" type="Polygon2D"]
 scale = Vector2(0.95, 0.95)

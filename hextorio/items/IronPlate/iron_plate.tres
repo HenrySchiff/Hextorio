@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://d0cx0wft6b6jv"]
+
+[ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_v1v0r"]
+[ext_resource type="PackedScene" uid="uid://o1nf2u8rgjvy" path="res://items/IronPlate/IronPlateShape.tscn" id="2_lfjft"]
+
+[resource]
+script = ExtResource("1_v1v0r")
+name = "Iron Plate"
+shape_scene = ExtResource("2_lfjft")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c3r2ieij50lmm"]
 
-[ext_resource type="Script" path="res://items/TransportBelt/transport_belt_shape.gd" id="1_l4880"]
+[ext_resource type="Script" uid="uid://c0h04mpavu087" path="res://items/TransportBelt/transport_belt_shape.gd" id="1_l4880"]
 
 [sub_resource type="Curve2D" id="Curve2D_s3nog"]
 resource_local_to_scene = true
@@ -13,7 +13,7 @@ point_count = 2
 clip_children = 2
 points = PackedVector2Array(-32, 0, 32, 0)
 width = 36.0
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0.172833, 0.172833, 0.172833, 1)
 joint_mode = 2
 script = ExtResource("1_l4880")
 
@@ -24,7 +24,7 @@ curve = SubResource("Curve2D_s3nog")
 position = Vector2(-40, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="Path2D/Arrow1"]
-color = Color(0.809523, 0.809524, 0, 1)
+color = Color(0.66, 0.66, 0.165, 1)
 polygon = PackedVector2Array(0, -8, 0, 8, 8, 0)
 
 [node name="Arrow2" type="PathFollow2D" parent="Path2D"]
@@ -32,7 +32,7 @@ position = Vector2(-8.01499, 0)
 progress = 32.0
 
 [node name="Polygon2D" type="Polygon2D" parent="Path2D/Arrow2"]
-color = Color(0.809523, 0.809524, 0, 1)
+color = Color(0.66, 0.66, 0.165, 1)
 polygon = PackedVector2Array(0, -8, 0, 8, 8, 0)
 
 [node name="Arrow3" type="PathFollow2D" parent="Path2D"]
@@ -40,5 +40,5 @@ position = Vector2(24.015, 0)
 progress = 64.0
 
 [node name="Polygon2D" type="Polygon2D" parent="Path2D/Arrow3"]
-color = Color(0.809523, 0.809524, 0, 1)
+color = Color(0.66, 0.66, 0.165, 1)
 polygon = PackedVector2Array(0, -8, 0, 8, 8, 0)

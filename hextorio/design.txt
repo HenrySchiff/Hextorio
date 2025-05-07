@@ -3,7 +3,6 @@ Entity extends Node2D
 | logic_components: [LogicComponent] // children of entity node
 
 Shape extends Node2D
-| 
 
 LogicComponent extends Node
 
@@ -11,9 +10,9 @@ Item extends Node2D
 | item_type: ItemType
 
 ItemType extends Resource
-| shape: Shape
-| entity_scene: PackedScene
-| recipe: Recipe
+| entity_scene: PackedScene || null
+| shape_scene: PackedScene
+| recipe: Recipe || null
 
 Recipe extends Resource
 | inputs: [ItemType]
@@ -35,13 +34,15 @@ Logic: scenes and scripts that handle automation / move items around.
 - Crafters hold a reference to two containers: an input and output container. They take items in the input container, and according to some recipe, convert them into items that appear in the output container. Crafters belong to Assembler, Furnaces, etc.
 
 
-Example:
+HexagonalTileMap extends Node2D
+|
+| // maps tile positions -> hexagon centers
+| hex_tile_map: Dictionary[Vector2i, Vector2] 
+|
+| // maps tile positions -> entities
+| entity_tile_map: Dictionary[Vector2i, Entity]
+|
+| local_to_map(Vector2) -> Vector2i
 
-class_name TransportBelt extends Entity
-var shape = $TransportBeltShape
-var left_lane = $LeftTransportLine
-var right_lane = $RightTransportLine
 
-class_name TransportBeltShape extends Shape
 
-class_name Item

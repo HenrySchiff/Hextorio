@@ -1,13 +1,17 @@
 [gd_scene load_steps=6 format=4 uid="uid://bcju3s11fa3ai"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_go4p2"]
+[ext_resource type="Script" uid="uid://ciqwqe1mq5cnk" path="res://main.gd" id="1_go4p2"]
 [ext_resource type="TileSet" uid="uid://co3wkd23dpolk" path="res://tileset.tres" id="1_rb5ky"]
-[ext_resource type="Script" path="res://tilemap.gd" id="3_hf0s6"]
-[ext_resource type="Script" path="res://camera_2d.gd" id="4_aeycg"]
+[ext_resource type="Script" uid="uid://dxrbq5dsj6bld" path="res://tilemap.gd" id="3_hf0s6"]
+[ext_resource type="Script" uid="uid://bamec7iv0rsf5" path="res://camera_2d.gd" id="4_aeycg"]
 [ext_resource type="PackedScene" uid="uid://dy8d1mmr0rffh" path="res://interface/Hotbar.tscn" id="6_y7ouh"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_go4p2")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.64, 0.5344, 0.352, 1)
+polygon = PackedVector2Array(0, 0, 2000, 0, 2000, 1000, 0, 1000)
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 texture_filter = 3

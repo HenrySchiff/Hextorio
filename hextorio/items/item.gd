@@ -1,13 +1,15 @@
 class_name Item extends Node2D
 
+static var item_scene: PackedScene = preload("res://items/Item.tscn")
+
+@export var item_type: ItemType
 var shape: Shape
-var tile_position: Vector2i
 
+static func new_item(_item_type: ItemType) -> Item:
+	var item = item_scene.instantiate()
+	item.item_type = _item_type
+	return item
 
-func _sync_shape(shape: Shape, tile_pos: Vector2i) -> void:
-	self.shape._copy(shape)
-	self.position = shape.position
-	self.tile_position = tile_pos
-
-func _tile_update(tilemap: TileMapLayer) -> void:
-	pass
+func _ready() -> void:
+	shape = item_type.shape_scene.instantiate()
+	add_child(shape)

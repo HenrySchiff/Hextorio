@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=6 format=3 uid="uid://b6306ek36e7e6"]
+
+[ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_qt5rv"]
+[ext_resource type="PackedScene" uid="uid://b3hrb4wlsklu7" path="res://items/TransportBelt/TransportBelt.tscn" id="1_uy0lk"]
+[ext_resource type="PackedScene" uid="uid://c3r2ieij50lmm" path="res://items/TransportBelt/TransportBeltShape.tscn" id="2_3hr8l"]
+[ext_resource type="Script" uid="uid://cjn6mjxnudc73" path="res://items/recipe.gd" id="3_r76vc"]
+
+[sub_resource type="Resource" id="Resource_cw6ld"]
+script = ExtResource("3_r76vc")
+inputs = Dictionary[ExtResource("1_qt5rv"), int]({})
+quantity = 1
+craft_time = 0.0
+metadata/_custom_type_script = "uid://cjn6mjxnudc73"
+
+[resource]
+script = ExtResource("1_qt5rv")
+name = "Transport Belt"
+entity_scene = ExtResource("1_uy0lk")
+shape_scene = ExtResource("2_3hr8l")
+recipe = SubResource("Resource_cw6ld")
+metadata/_custom_type_script = "uid://51j7l6mrgks3"

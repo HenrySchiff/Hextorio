@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://b3hrb4wlsklu7"]
 
 [ext_resource type="Script" uid="uid://boc1v6kxnt30y" path="res://items/TransportBelt/transport_belt.gd" id="1_cwk5p"]
-[ext_resource type="PackedScene" uid="uid://c3r2ieij50lmm" path="res://items/TransportBelt/TransportBeltShape.tscn" id="2_jjyfs"]
-[ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic_components/TransportLine.tscn" id="3_ox3t2"]
+[ext_resource type="Resource" uid="uid://dg3klalnwsmfv" path="res://items/TransportBelt/transport_belt.tres" id="2_re3sd"]
+[ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic/TransportLine.tscn" id="3_ox3t2"]
 
-[sub_resource type="Curve2D" id="Curve2D_l8nk1"]
+[sub_resource type="Curve2D" id="Curve2D_gypoq"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_re3sd"]
+[sub_resource type="Curve2D" id="Curve2D_jd3hs"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
@@ -21,11 +21,10 @@ point_count = 2
 [node name="TransportBelt" type="Node2D"]
 rotation = -6.28319
 script = ExtResource("1_cwk5p")
-
-[node name="TransportBeltShape" parent="." instance=ExtResource("2_jjyfs")]
+item_type = ExtResource("2_re3sd")
 
 [node name="LeftTransportLine" parent="." instance=ExtResource("3_ox3t2")]
-curve = SubResource("Curve2D_l8nk1")
+curve = SubResource("Curve2D_gypoq")
 
 [node name="RightTransportLine" parent="." instance=ExtResource("3_ox3t2")]
-curve = SubResource("Curve2D_re3sd")
+curve = SubResource("Curve2D_jd3hs")

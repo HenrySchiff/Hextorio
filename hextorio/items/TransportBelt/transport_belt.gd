@@ -1,39 +1,12 @@
-class_name TransportBelt extends Item
+class_name TransportBelt extends Entity
 
 @onready var left_transport_line: TransportLine = $LeftTransportLine
 @onready var right_transport_line: TransportLine = $RightTransportLine
 
 var next_belt: TransportBelt = null
 
-var dot_scene = preload("res://Dot.tscn")
-
-func _ready():
+func _ready() -> void:
 	shape = $TransportBeltShape
-	
-	return
-	for point in Global.HEX_POINTS_LEGEND["SIDE_CENTER"]:
-		var dot = dot_scene.instantiate()
-		dot.position = point
-		add_child(dot)
-		
-	for pair in Global.HEX_POINTS_LEGEND["SIDE_QUARTER_PAIRS"]:
-		for point in pair:
-			var dot = dot_scene.instantiate()
-			dot.position = point
-			dot.color = Color.SADDLE_BROWN
-			add_child(dot)
-		
-	for point in Global.HEX_POINTS_LEGEND["MIDDLE_CENTER"]:
-		var dot = dot_scene.instantiate()
-		dot.position = point
-		dot.color = Color.LAWN_GREEN
-		add_child(dot)
-		
-	for point in Global.HEX_POINTS_LEGEND["SMALL"]:
-		var dot = dot_scene.instantiate()
-		dot.position = point
-		dot.color = Color.WEB_MAROON
-		add_child(dot)
 		
 func _sync_shape(shape: Shape, tile_pos: Vector2i) -> void:
 	super(shape, tile_pos)
@@ -97,24 +70,30 @@ func _sync_shape(shape: Shape, tile_pos: Vector2i) -> void:
 			right_transport_line.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 2)
 
 func _tile_update(tilemap: TileMapLayer) -> void:
-	var next: Item = tilemap.get_neighbor(tile_position, shape.output_index)
-	if !next: return
+	var next = tilemap.get_neighbor(tile_position, shape.output_index)
+	
+	if !next || !(next is TransportBelt):
+		return
+	
+	if next.shape.input_index != (shape.output_index + 3) % 6: 
+		return
+		
 	next_belt = next
+	left_transport_line.next_line = next_belt.left_transport_line
+	right_transport_line.next_line = next_belt.right_transport_line
 
-func _process(delta: float) -> void:
-	update_transport_line(left_transport_line, true, delta)
-	update_transport_line(right_transport_line, false, delta)
-		
-func update_transport_line(line: TransportLine, left: bool, delta):
-	if !line.has_item:
-		return 
-		
-	line.item_demo.progress += 47 * delta
-	if line.item_demo.progress_ratio >= 1:
-		if !next_belt:
-			return
-		line.give_item()
-		if left:
-			next_belt.left_transport_line.receive_item(line.item_demo.progress_ratio - 1)
-		else:
-			next_belt.right_transport_line.receive_item(line.item_demo.progress_ratio - 1)
+func attempt_item_place(item_type: ItemType, point: Vector2) -> bool:
+	var local_point: Vector2 = point - global_position
+	
+	var left_point = left_transport_line.get_curve().get_closest_point(local_point)
+	var right_point = right_transport_line.get_curve().get_closest_point(local_point)
+	
+	var offset: float
+	if local_point.distance_to(left_point) < local_point.distance_to(right_point):
+		offset = left_transport_line.get_curve().get_closest_offset(local_point)
+		left_transport_line.receive_item(Item.new_item(item_type), offset)
+	else:
+		offset = right_transport_line.get_curve().get_closest_offset(local_point)
+		right_transport_line.receive_item(Item.new_item(item_type), offset)
+
+	return true

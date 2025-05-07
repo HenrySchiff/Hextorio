@@ -2,6 +2,7 @@ class_name Shape extends Node2D
 
 # The tiles that this shape occupies (aka its polyhex) relative to its center (0, 0)
 var occupied_tiles: Array[Vector2i] = Global.MONOHEX
+var icon_scale: Vector2 = Vector2(1, 1)
 
 func _rotate_whole(direction: int):
 	pass

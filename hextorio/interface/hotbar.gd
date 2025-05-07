@@ -13,11 +13,11 @@ func _ready():
 	
 	set_slot_selected(0)
 	
-func get_slot_item(index: int) -> PackedScene:
+func get_slot_item(index: int) -> ItemType:
 	return buttons.get_child(index).held_item
 
-func set_slot_item(index: int, item_scene: PackedScene, shape_scene: PackedScene) -> void:
-	buttons.get_child(index).set_item(item_scene, shape_scene)
+func set_slot_item(index: int, item_type: ItemType) -> void:
+	buttons.get_child(index).set_item(item_type)
 
 func set_slot_selected(index: int) -> void:
 	if index < 0 || index >= num_slots:

@@ -13,6 +13,10 @@ func _ready():
 		hex_points.append(Vector2(cos(i / 3.0 * PI), sin(i / 3.0 * PI)) * hex_radius)
 	update_belt_line()
 
+func _process(delta):
+	for arrow in $Path2D.get_children():
+		arrow.progress_ratio += delta * 0.5
+
 func _copy(other: Shape):
 	super(other)
 	var other_belt: TransportBeltShape = other as TransportBeltShape
@@ -55,7 +59,3 @@ func sync_arrows(other_belt):
 		var arrow: PathFollow2D = $Path2D.get_child(i)
 		var other_arrow: PathFollow2D = other_belt.get_node("Path2D").get_child(i)
 		arrow.progress_ratio = other_arrow.progress_ratio
-
-func _process(delta):
-	for arrow in $Path2D.get_children():
-		arrow.progress_ratio += delta * 0.5

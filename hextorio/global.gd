@@ -1,6 +1,6 @@
 extends Node
 
-# Hexagons use the axial coordinate system, pointy top orientation, and all conventions defined here:
+# Hexagons use the axial coordinate system, pointy top orientation, and other conventions defined here:
 # https://www.redblobgames.com/grids/hexagons/
 
 const INNER_RADIUS: float = 32.0
@@ -20,6 +20,13 @@ const HEPTAHEX: Array[Vector2i] = [
 	Vector2i(0, 0), Vector2i(0, -1), Vector2i(1, -1), Vector2i(1, 0), 
 	Vector2i(0, 1), Vector2i(-1, 1), Vector2i(-1, 0)
 ]
+
+
+func hex_to_screen(hex_pos: Vector2i) -> Vector2:
+	return Vector2.ZERO
+	
+func screen_to_hex(screen_pos: Vector2) -> Vector2i:
+	return Vector2i.ZERO
 
 
 func get_hex_points(radius, angle_offset=0) -> Array[Vector2]:
