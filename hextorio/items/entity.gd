@@ -14,5 +14,5 @@ func _sync_shape(shape: Shape, tile_pos: Vector2i) -> void:
 	self.position = shape.position
 	self.tile_position = tile_pos
 
-func _tile_update(tilemap: TileMapLayer) -> void:
+func _tile_update(tilemap: Node2D) -> void:
 	pass

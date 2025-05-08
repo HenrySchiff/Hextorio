@@ -1,12 +1,12 @@
 class_name TransportBeltShape extends Shape
 
 const hex_radius: int = 32
+const BELT_SPEED: int = 50
 var hex_points: Array[Vector2]
 var belt_line: PackedVector2Array
 
-var input_index = 0
-var output_index = 3
-
+var input_index = 3
+var output_index = 0
 
 func _ready():
 	for i in range(6.0):
@@ -15,7 +15,8 @@ func _ready():
 
 func _process(delta):
 	for arrow in $Path2D.get_children():
-		arrow.progress_ratio += delta * 0.5
+		#arrow.progress_ratio += delta * 0.5
+		arrow.progress += delta * BELT_SPEED
 
 func _copy(other: Shape):
 	super(other)

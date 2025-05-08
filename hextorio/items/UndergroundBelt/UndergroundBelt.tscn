@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqwgmxjshw7n2"]
+
+[ext_resource type="Script" uid="uid://cgrmmjlg1pt5k" path="res://items/UndergroundBelt/underground_belt.gd" id="1_53b1u"]
+[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/UndergroundBelt/UndergroundBeltShape.tscn" id="2_mvgvr"]
+
+[node name="UndergroundBelt" type="Node2D"]
+script = ExtResource("1_53b1u")
+
+[node name="UndergroundBeltShape" parent="." instance=ExtResource("2_mvgvr")]
+default_color = Color(0.172833, 0.172833, 0.172833, 1)

@@ -1,33 +1,47 @@
-extends TileMapLayer
+extends Node2D
+
+var dot_scene = preload("res://Dot.tscn")
+
+# maps tile positions -> hexagon centers
+var hex_tile_map: Dictionary[Vector2i, Vector2]
+
+func _ready():
+	hex_tile_map = Global.generate_hex_grid(30, 20)
+		
+func _draw():
+	var points = Global.get_hex_points(Global.HEX_SIZE, 1.0/6.0 * PI)
+	for tile in hex_tile_map:
+		var center = hex_tile_map[tile]
+		for i in range(6):
+			var point = center + points[i]
+			var next_point = center + points[(i + 1) % 6]
+			draw_line(point, next_point, Color.DIM_GRAY, 2)
 
 # you can't retrieve scene tiles from the regular godot tilemap
 var scene_tile_map: Dictionary = {}
 
-func set_scene_tile(pos: Vector2i, item) -> void:
-	self.add_child(item)
-	item.tile_position = pos
+func set_scene_tile(pos: Vector2i, entity: Entity) -> void:
+	self.add_child(entity)
+	entity.tile_position = pos
 	
-	for relative_pos in item.shape.occupied_tiles:
+	for relative_pos in entity.shape.occupied_tiles:
 		var tile: Vector2i = pos + relative_pos
 		
-		var prev_item = scene_tile_map.get(tile)
-		if prev_item:
+		var prev_entity = scene_tile_map.get(tile)
+		if prev_entity:
 			remove_scene_tile(tile)
 			
-		#set_cell(tile, 0, Vector2i.ZERO)
-		scene_tile_map[tile] = item
+		scene_tile_map[tile] = entity
 
 func remove_scene_tile(pos: Vector2i) -> bool:
-	var item = scene_tile_map.get(pos)
-	if !item: return false
+	var entity: Entity = scene_tile_map.get(pos)
+	if !entity: return false
 	
-	for relative_pos in item.shape.occupied_tiles:
-		var tile: Vector2i = item.tile_position + relative_pos
-		
+	for relative_pos in entity.shape.occupied_tiles:
+		var tile: Vector2i = entity.tile_position + relative_pos
 		scene_tile_map.erase(tile)
-		#set_cell(tile, 1, Vector2i.ZERO)
 	
-	item.queue_free()
+	entity.queue_free()
 	return true
 	
 func get_scene_tile(pos: Vector2i) :

@@ -1,12 +1,12 @@
 class_name TransportLine extends Path2D
 
-const ITEM_GAP: int = 15
-var speed: int = 50
-var next_line: TransportLine = null
+const ITEM_GAP: int = 16
+var belt_speed: int
+var next_line: TransportLine
 
 func _process(delta: float) -> void:
 	for path_follower in get_children():
-		path_follower.progress += speed * delta
+		path_follower.progress += belt_speed * delta
 		
 		var ahead: PathFollow2D
 		var ahead_progress: float
