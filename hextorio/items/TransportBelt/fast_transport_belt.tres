@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BeltType" load_steps=4 format=3 uid="uid://b58m1s7txdk8g"]
+
+[ext_resource type="PackedScene" uid="uid://b3hrb4wlsklu7" path="res://items/TransportBelt/scenes/TransportBelt.tscn" id="1_11afv"]
+[ext_resource type="Script" uid="uid://civu7da5ukpw7" path="res://items/TransportBelt/belt_type.gd" id="2_px511"]
+[ext_resource type="PackedScene" uid="uid://c3r2ieij50lmm" path="res://items/TransportBelt/scenes/TransportBeltShape.tscn" id="3_2ffil"]
+
+[resource]
+script = ExtResource("2_px511")
+belt_speed = 100
+underground_distance = 6
+color = Color(0.7, 0.168, 0.168, 1)
+name = "Fast Transport Belt"
+entity_scene = ExtResource("1_11afv")
+shape_scene = ExtResource("3_2ffil")
+metadata/_custom_type_script = "uid://civu7da5ukpw7"

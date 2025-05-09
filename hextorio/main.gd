@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var tilemap: Node2D = $TileMap
+@onready var tilemap: HexTileMap = $HexTileMap
 @onready var camera: Camera2D = $Camera2D
 @onready var hotbar: Hotbar = $CanvasLayer/Hotbar
 @onready var build_audio: AudioStreamPlayer2D = $BuildAudioPlayer
@@ -14,21 +14,23 @@ var assembling_machine: ItemType = preload("res://items/AssemblingMachine/assemb
 var iron_plate: ItemType = preload("res://items/IronPlate/iron_plate.tres")
 var copper_plate: ItemType = preload("res://items/CopperPlate/copper_plate.tres")
 var underground_belt: ItemType = preload("res://items/UndergroundBelt/underground_belt.tres")
+var fast_underground_belt: ItemType = preload("res://items/UndergroundBelt/fast_underground_belt.tres")
+var fast_transport_belt: ItemType = preload("res://items/TransportBelt/fast_transport_belt.tres")
+var express_transport_belt: ItemType = preload("res://items/TransportBelt/express_transport_belt.tres")
 
 var selected_item_type: ItemType
 var selected_item_shape: Shape
 
 func select_item(item_type: ItemType) -> void:
 	selected_item_type = item_type
-
+	
 	if selected_item_shape: 
 		selected_item_shape.queue_free()
 	
 	if !selected_item_type: 
-		print("return")
 		return
 	
-	selected_item_shape = selected_item_type.shape_scene.instantiate()
+	selected_item_shape = Shape.new_shape(selected_item_type)
 	selected_item_shape.modulate.a = 0.6
 	self.add_child(selected_item_shape)
 
@@ -36,11 +38,14 @@ func _ready():
 	select_item(transport_belt)
 	
 	hotbar.set_slot_item(0, transport_belt)
-	hotbar.set_slot_item(1, inserter)
-	hotbar.set_slot_item(2, assembling_machine)
-	hotbar.set_slot_item(3, iron_plate)
-	hotbar.set_slot_item(4, copper_plate)
-	hotbar.set_slot_item(5, underground_belt)
+	hotbar.set_slot_item(1, underground_belt)
+	hotbar.set_slot_item(2, fast_transport_belt)
+	hotbar.set_slot_item(3, fast_underground_belt)
+	hotbar.set_slot_item(4, express_transport_belt)
+	hotbar.set_slot_item(5, iron_plate)
+	hotbar.set_slot_item(6, copper_plate)
+	hotbar.set_slot_item(7, inserter)
+	hotbar.set_slot_item(8, assembling_machine)
 
 func _process(delta):
 	var mouse: Vector2 = get_global_mouse_position()
@@ -51,6 +56,11 @@ func _process(delta):
 		var item_type = entity.item_type if entity else null
 		select_item(item_type)
 		#selected_item_shape._copy(entity.shape)
+	
+	if Input.is_action_pressed("remove"):
+		if tilemap.remove_scene_tile(tile):
+			deconstruct_audio.position = mouse
+			deconstruct_audio.play()
 	
 	if !selected_item_type: 
 		return
@@ -67,6 +77,10 @@ func _process(delta):
 			
 		selected_item_shape._rotate_whole(1)
 		
+	var shift: bool = Input.is_action_pressed("shift")
+	if selected_item_shape is UndergroundBeltShape:
+		selected_item_shape.set_entrance(!shift)
+		
 	if Input.is_action_just_pressed("flip_horizontal"):
 		selected_item_shape._flip_horizontal()
 	
@@ -77,7 +91,6 @@ func _process(delta):
 		if !selected_item_type.entity_scene:
 			return
 		
-		var has_item: bool = Input.is_action_pressed("shift")
 		var entity: Entity = Entity.new_entity(selected_item_type)
 		tilemap.set_scene_tile(tile, entity)
 		
@@ -87,11 +100,6 @@ func _process(delta):
 		
 		build_audio.position = selected_item_shape.position
 		build_audio.play()
-	
-	if Input.is_action_pressed("remove"):
-		if tilemap.remove_scene_tile(tile):
-			deconstruct_audio.position = selected_item_shape.position
-			deconstruct_audio.play()
 		
 	if Input.is_action_just_pressed("drop"):
 		var entity = tilemap.get_scene_tile(tile)

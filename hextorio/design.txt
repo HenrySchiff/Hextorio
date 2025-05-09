@@ -43,6 +43,3 @@ HexagonalTileMap extends Node2D
 | entity_tile_map: Dictionary[Vector2i, Entity]
 |
 | local_to_map(Vector2) -> Vector2i
-
-
-

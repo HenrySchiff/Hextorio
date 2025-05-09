@@ -1,7 +1,15 @@
 class_name TransportBeltShape extends Shape
 
-const hex_radius: int = 32
-const BELT_SPEED: int = 50
+@onready var arrows: Array[PathFollow2D] = [
+	$Path2D/Arrow1,
+	$Path2D/Arrow2,
+	$Path2D/Arrow3
+]
+
+# given by resource on instantiaton
+var belt_speed: int
+var color: Color
+
 var hex_points: Array[Vector2]
 var belt_line: PackedVector2Array
 
@@ -9,20 +17,42 @@ var input_index = 3
 var output_index = 0
 
 func _ready():
-	for i in range(6.0):
-		hex_points.append(Vector2(cos(i / 3.0 * PI), sin(i / 3.0 * PI)) * hex_radius)
+	var belt_type: BeltType = item_type as BeltType
+	belt_speed = belt_type.belt_speed
+	color = belt_type.color
+	
+	$Path2D/Arrow1/Polygon2D.color = color
+	$Path2D/Arrow2/Polygon2D.color = color
+	$Path2D/Arrow3/Polygon2D.color = color
+	
+	# t = d/v, msec = pixels / (pixels/msec)
+	# v = belt_speed/60 pixels/frame = belt_speed/1 pixles/second = belt_speed / 1000 pixels per msec
+	#var cycle_time_msec: int = (Global.INNER_RADIUS * 2) / (belt_speed / 1000.0)
+	#print(cycle_time_msec)
+	#var progress: float = (Time.get_ticks_msec() % cycle_time_msec) / cycle_time_msec
+	#$Path2D/Arrow1.progress_ratio = progress
+	#$Path2D/Arrow2.progress_ratio = progress + 1.0/3.0
+	#$Path2D/Arrow3.progress_ratio = progress + 2.0/3.0
+	
+	hex_points = Global.get_hex_points(Global.INNER_RADIUS)
 	update_belt_line()
 
 func _process(delta):
-	for arrow in $Path2D.get_children():
-		#arrow.progress_ratio += delta * 0.5
-		arrow.progress += delta * BELT_SPEED
+	#for arrow in $Path2D.get_children():
+		#arrow.progress += belt_speed * delta
+		
+	var base_progress = ProgressSync.progress
+	var offset = 96.0 / 3.0
+
+	for i in range(arrows.size()):
+		arrows[i].progress = fmod(base_progress + i * offset, 96.0) * (belt_speed / 50.0)
+		
 
 func _copy(other: Shape):
 	super(other)
 	var other_belt: TransportBeltShape = other as TransportBeltShape
 	self.set_belt_line(other_belt.belt_line)
-	self.sync_arrows(other_belt)
+	#self.sync_arrows(other_belt)
 	self.input_index = other.input_index
 	self.output_index = other.output_index
 

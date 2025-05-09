@@ -3,15 +3,20 @@ class_name TransportBelt extends Entity
 @onready var left_transport_line: TransportLine = $LeftTransportLine
 @onready var right_transport_line: TransportLine = $RightTransportLine
 
-const BELT_SPEED: int = 50
+# given by resource on instantiaton
+var belt_speed: int
 
-var next_belt: TransportBelt = null
+#var next_belt: TransportBelt = null
 
 func _ready() -> void:
-	shape = $TransportBeltShape
-	left_transport_line.belt_speed = BELT_SPEED
-	right_transport_line.belt_speed = BELT_SPEED
-		
+	super()
+	
+	var belt_type: BeltType = item_type as BeltType
+	belt_speed = belt_type.belt_speed
+	
+	left_transport_line.belt_speed = belt_speed
+	right_transport_line.belt_speed = belt_speed
+
 func _sync_shape(shape: Shape, tile_pos: Vector2i) -> void:
 	super(shape, tile_pos)
 	var belt_shape: TransportBeltShape = shape as TransportBeltShape
@@ -73,7 +78,7 @@ func _sync_shape(shape: Shape, tile_pos: Vector2i) -> void:
 			point = Global.HEX_POINTS_LEGEND["SMALL"][right_index_2]
 			right_transport_line.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 2)
 
-func _tile_update(tilemap: Node2D) -> void:
+func _tile_update(tilemap: HexTileMap) -> void:
 	var next = tilemap.get_neighbor(tile_position, shape.output_index)
 	
 	if !next || !(next is TransportBelt):
@@ -82,9 +87,9 @@ func _tile_update(tilemap: Node2D) -> void:
 	if next.shape.input_index != (shape.output_index + 3) % 6: 
 		return
 		
-	next_belt = next
-	left_transport_line.next_line = next_belt.left_transport_line
-	right_transport_line.next_line = next_belt.right_transport_line
+	#next_belt = next
+	left_transport_line.next_line = next.left_transport_line
+	right_transport_line.next_line = next.right_transport_line
 
 func attempt_item_place(item_type: ItemType, point: Vector2) -> bool:
 	var local_point: Vector2 = point - global_position

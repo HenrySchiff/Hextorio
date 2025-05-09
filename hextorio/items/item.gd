@@ -11,6 +11,6 @@ static func new_item(_item_type: ItemType) -> Item:
 	return item
 
 func _ready() -> void:
-	shape = item_type.shape_scene.instantiate()
+	shape = Shape.new_shape(item_type)
 	shape.scale = shape.item_scale
 	add_child(shape)

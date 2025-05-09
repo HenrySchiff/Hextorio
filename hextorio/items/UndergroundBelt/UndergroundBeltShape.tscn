@@ -13,7 +13,7 @@ point_count = 2
 clip_children = 2
 points = PackedVector2Array(-32, 0, 32, 0)
 width = 36.0
-default_color = Color(0.172833, 0.172833, 0.172833, 1)
+default_color = Color(0.197937, 0.197937, 0.197937, 1)
 script = ExtResource("1_y0nrl")
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -43,5 +43,8 @@ color = Color(0.66, 0.66, 0.165, 1)
 polygon = PackedVector2Array(0, -8, 0, 8, 8, 0)
 
 [node name="Roof" type="Polygon2D" parent="."]
+z_index = 500
 color = Color(0.513233, 0.513233, 0.513233, 1)
 polygon = PackedVector2Array(-16, -18, 32, -18, 32, 18, -16, 18)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]

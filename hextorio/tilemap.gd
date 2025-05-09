@@ -1,4 +1,4 @@
-extends Node2D
+class_name HexTileMap extends Node2D
 
 var dot_scene = preload("res://Dot.tscn")
 
@@ -44,11 +44,14 @@ func remove_scene_tile(pos: Vector2i) -> bool:
 	entity.queue_free()
 	return true
 	
-func get_scene_tile(pos: Vector2i) :
+func get_scene_tile(pos: Vector2i) -> Entity:
 	return scene_tile_map.get(pos)
 	
-func get_neighbor(pos: Vector2i, n_index: int) :
-	return scene_tile_map.get(pos + Global.NEIGHBORS[n_index])
+func get_neighbor_pos(pos: Vector2i, n_index: int) -> Vector2i:
+	return pos + Global.NEIGHBORS[n_index]
+	
+func get_neighbor(pos: Vector2i, n_index: int) -> Entity:
+	return scene_tile_map.get(get_neighbor_pos(pos, n_index))
 	
 func update_neighbors(pos: Vector2i):
 	for i in range(Global.NEIGHBORS.size()):

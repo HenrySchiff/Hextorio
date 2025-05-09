@@ -21,7 +21,8 @@ func set_item(item_type: ItemType) -> void:
 	for n in viewport.get_children():
 		remove_child(n)
 	
-	var shape: Shape = item_type.shape_scene.instantiate()
+	#var shape: Shape = item_type.shape_scene.instantiate()
+	var shape = Shape.new_shape(item_type)
 	shape.position = ICON_SIZE / 2
 	shape.scale = shape.icon_scale
 	viewport.add_child(shape)

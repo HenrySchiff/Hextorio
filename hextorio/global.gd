@@ -49,16 +49,19 @@ func axial_round(frac: Vector2) -> Vector2i:
 		return Vector2i(grid.x + round(remainder.x + 0.5 * remainder.y), grid.y)
 	else:
 		return Vector2i(grid.x, grid.y + round(remainder.y + 0.5 * remainder.x))
-	
-	
+
+
 func generate_hex_grid(width: int, height: int) ->  Dictionary[Vector2i, Vector2]:
 	var grid: Dictionary[Vector2i, Vector2] = {}
+	var x_offset = 0
 	
 	for y: int in range(height):
 		for x: int in range(width):
-			var tile := Vector2i(x, y)
+			var tile := Vector2i(x + x_offset, y)
 			var center = hex_to_screen(tile)
 			grid[tile] = center
+		if y % 2 == 1:
+			x_offset -= 1
 	
 	return grid
 

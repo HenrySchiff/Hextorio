@@ -21,7 +21,7 @@ script = ExtResource("1_go4p2")
 color = Color(0.64, 0.5344, 0.352, 1)
 polygon = PackedVector2Array(-3000, -3000, 3000, -3000, 3000, 3000, -3000, 3000)
 
-[node name="TileMap" type="Node2D" parent="."]
+[node name="HexTileMap" type="Node2D" parent="."]
 texture_filter = 3
 script = ExtResource("3_hf0s6")
 

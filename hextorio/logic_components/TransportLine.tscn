@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://d17labgx6102s" path="res://logic_components/transport_line.gd" id="1_qpi3h"]
 
 [sub_resource type="Curve2D" id="Curve2D_pf2xt"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, 0, 0, 0, 0, 0, -32, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
 }
 point_count = 2
 
 [node name="TransportLine" type="Path2D"]
+z_index = 1000
+z_as_relative = false
 curve = SubResource("Curve2D_pf2xt")
 script = ExtResource("1_qpi3h")

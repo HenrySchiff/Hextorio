@@ -4,6 +4,12 @@ class_name Shape extends Node2D
 var occupied_tiles: Array[Vector2i] = Global.MONOHEX
 var icon_scale: Vector2 = Vector2(1, 1)
 var item_scale: Vector2 = Vector2(0.5, 0.5)
+var item_type: ItemType
+
+static func new_shape(_item_type: ItemType) -> Shape:
+	var shape = _item_type.shape_scene.instantiate()
+	shape.item_type = _item_type
+	return shape
 
 func _rotate_whole(direction: int):
 	pass
