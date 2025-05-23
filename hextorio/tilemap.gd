@@ -6,10 +6,11 @@ var dot_scene = preload("res://Dot.tscn")
 var hex_tile_map: Dictionary[Vector2i, Vector2]
 
 func _ready():
-	hex_tile_map = Global.generate_hex_grid(30, 20)
+	hex_tile_map = HexUtil.generate_hex_grid(30, 20)
 		
 func _draw():
-	var points = Global.get_hex_points(Global.HEX_SIZE, 1.0/6.0 * PI)
+	var points = HexUtil.get_point_set(HexUtil.PointSet.VERTICES)
+	var once = true
 	for tile in hex_tile_map:
 		var center = hex_tile_map[tile]
 		for i in range(6):
@@ -20,11 +21,12 @@ func _draw():
 # you can't retrieve scene tiles from the regular godot tilemap
 var scene_tile_map: Dictionary = {}
 
-func set_scene_tile(pos: Vector2i, entity: Entity) -> void:
+func set_scene_tile(pos: Vector2i, entity: Entity, occupied_tiles: Array[Vector2i]) -> void:
 	self.add_child(entity)
 	entity.tile_position = pos
 	
-	for relative_pos in entity.shape.occupied_tiles:
+	#for relative_pos in entity.shape.occupied_tiles:
+	for relative_pos in occupied_tiles:
 		var tile: Vector2i = pos + relative_pos
 		
 		var prev_entity = scene_tile_map.get(tile)
@@ -48,13 +50,13 @@ func get_scene_tile(pos: Vector2i) -> Entity:
 	return scene_tile_map.get(pos)
 	
 func get_neighbor_pos(pos: Vector2i, n_index: int) -> Vector2i:
-	return pos + Global.NEIGHBORS[n_index]
+	return pos + HexUtil.NEIGHBORS[n_index]
 	
 func get_neighbor(pos: Vector2i, n_index: int) -> Entity:
 	return scene_tile_map.get(get_neighbor_pos(pos, n_index))
 	
 func update_neighbors(pos: Vector2i):
-	for i in range(Global.NEIGHBORS.size()):
+	for i in range(HexUtil.NEIGHBORS.size()):
 		var item = get_neighbor(pos, i)
 		if !item: continue
 		item._tile_update(self)

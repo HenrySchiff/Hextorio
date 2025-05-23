@@ -6,6 +6,8 @@ class_name Hotbar extends Control
 @onready var hotbar_button_scene: PackedScene = preload("res://interface/HotbarButton.tscn")
 @onready var buttons: HBoxContainer = $MarginContainer/HBoxContainer
 
+var set_slot_selected_function: Callable
+
 func _ready():
 	for i in range(num_slots):
 		var button = hotbar_button_scene.instantiate()
@@ -26,3 +28,9 @@ func set_slot_selected(index: int) -> void:
 	buttons.get_child(selected_index).set_selected(false)
 	buttons.get_child(index).set_selected(true)
 	selected_index = index
+	
+	if !set_slot_selected_function:
+		return
+	
+	var selected_item: ItemType = get_slot_item(selected_index)
+	set_slot_selected_function.call(selected_item)

@@ -17,9 +17,11 @@ var underground_belt: ItemType = preload("res://items/UndergroundBelt/undergroun
 var fast_underground_belt: ItemType = preload("res://items/UndergroundBelt/fast_underground_belt.tres")
 var fast_transport_belt: ItemType = preload("res://items/TransportBelt/fast_transport_belt.tres")
 var express_transport_belt: ItemType = preload("res://items/TransportBelt/express_transport_belt.tres")
+var splitter: ItemType = preload("res://items/Splitter/splitter.tres")
 
 var selected_item_type: ItemType
 var selected_item_shape: Shape
+
 
 func select_item(item_type: ItemType) -> void:
 	selected_item_type = item_type
@@ -37,6 +39,7 @@ func select_item(item_type: ItemType) -> void:
 func _ready():
 	select_item(transport_belt)
 	
+	hotbar.set_slot_selected_function = select_item
 	hotbar.set_slot_item(0, transport_belt)
 	hotbar.set_slot_item(1, underground_belt)
 	hotbar.set_slot_item(2, fast_transport_belt)
@@ -46,10 +49,11 @@ func _ready():
 	hotbar.set_slot_item(6, copper_plate)
 	hotbar.set_slot_item(7, inserter)
 	hotbar.set_slot_item(8, assembling_machine)
+	hotbar.set_slot_item(9, splitter)
 
-func _process(delta):
+func _process(_delta: float) -> void:
 	var mouse: Vector2 = get_global_mouse_position()
-	var tile = Global.screen_to_hex(get_global_mouse_position())
+	var tile = HexUtil.screen_to_hex(get_global_mouse_position())
 	
 	if Input.is_action_just_pressed("pipette"):
 		var entity: Entity = tilemap.get_scene_tile(tile)
@@ -66,16 +70,18 @@ func _process(delta):
 		return
 		
 	if selected_item_type.entity_scene:
-		selected_item_shape.position = Global.hex_to_screen(tile)
+		selected_item_shape.position = HexUtil.hex_to_screen(tile)
 	else:
 		selected_item_shape.position = mouse + Vector2(10, 10)
 	
 	if Input.is_action_just_pressed("rotate"):
-		if Input.is_action_pressed("shift"):
-			selected_item_shape._rotate_end(1)
+		var direction = -1 if Input.is_action_pressed("shift") else 1
+		
+		if Input.is_action_pressed("control"):
+			selected_item_shape._rotate_end(direction)
 			return
 			
-		selected_item_shape._rotate_whole(1)
+		selected_item_shape._rotate_whole(direction)
 		
 	var shift: bool = Input.is_action_pressed("shift")
 	if selected_item_shape is UndergroundBeltShape:
@@ -92,7 +98,7 @@ func _process(delta):
 			return
 		
 		var entity: Entity = Entity.new_entity(selected_item_type)
-		tilemap.set_scene_tile(tile, entity)
+		tilemap.set_scene_tile(tile, entity, selected_item_shape.occupied_tiles)
 		
 		entity._sync_shape(selected_item_shape, tile)
 		entity._tile_update(tilemap)

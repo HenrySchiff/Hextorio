@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvibdaxtx6552"]
 
-[ext_resource type="Script" uid="uid://b7jkj4t2afyt6" path="res://items/UndergroundBelt/underground_belt_shape.gd" id="1_y0nrl"]
+[ext_resource type="Script" uid="uid://b7jkj4t2afyt6" path="res://items/UndergroundBelt/scenes/underground_belt_shape.gd" id="1_y0nrl"]
 
 [sub_resource type="Curve2D" id="Curve2D_y0nrl"]
 resource_local_to_scene = true

@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://c322y8ik0ncqs"]
+
+[ext_resource type="Script" uid="uid://brh34mgac62ay" path="res://items/Splitter/splitter.gd" id="1_86umy"]
+[ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic_components/TransportLine.tscn" id="2_awhlu"]
+
+[sub_resource type="Curve2D" id="Curve2D_qi6e3"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_awhlu"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_7rak0"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_7evb8"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_fatq6"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ydsq1"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_rr8q1"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_6xgug"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[node name="Splitter" type="Node2D"]
+script = ExtResource("1_86umy")
+
+[node name="LeftInput" type="Node2D" parent="."]
+
+[node name="LeftLine" parent="LeftInput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_qi6e3")
+
+[node name="RightLine" parent="LeftInput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_awhlu")
+
+[node name="RightInput" type="Node2D" parent="."]
+
+[node name="LeftLine" parent="RightInput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_7rak0")
+
+[node name="RightLine" parent="RightInput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_7evb8")
+
+[node name="LeftOutput" type="Node2D" parent="."]
+
+[node name="LeftLine" parent="LeftOutput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_fatq6")
+
+[node name="RightLine" parent="LeftOutput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_ydsq1")
+
+[node name="RightOutput" type="Node2D" parent="."]
+
+[node name="LeftLine" parent="RightOutput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_rr8q1")
+
+[node name="RightLine" parent="RightOutput" instance=ExtResource("2_awhlu")]
+curve = SubResource("Curve2D_6xgug")

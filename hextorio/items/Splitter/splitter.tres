@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://0moxrfu21y63"]
+
+[ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_0pphl"]
+[ext_resource type="PackedScene" uid="uid://c322y8ik0ncqs" path="res://items/Splitter/Splitter.tscn" id="1_335km"]
+[ext_resource type="PackedScene" uid="uid://cklbl5ii75lw5" path="res://items/Splitter/SplitterShape.tscn" id="2_du5a4"]
+[ext_resource type="Resource" uid="uid://divtrhw6oy1hc" path="res://items/TransportBelt/subtypes/regular_belt_type.tres" id="4_h36ys"]
+
+[resource]
+script = ExtResource("1_0pphl")
+name = "Splitter"
+entity_scene = ExtResource("1_335km")
+shape_scene = ExtResource("2_du5a4")
+subtype = ExtResource("4_h36ys")
+metadata/_custom_type_script = "uid://51j7l6mrgks3"

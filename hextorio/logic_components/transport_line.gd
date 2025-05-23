@@ -48,3 +48,70 @@ func receive_item(item: Item, progress: float) -> bool:
 	add_child(new_path_follower)
 	move_child(new_path_follower, 0)
 	return true
+
+static func set_lines(left: TransportLine, right: TransportLine, input: int, output: int) -> void:
+	left.curve.clear_points()
+	right.curve.clear_points()
+	
+	var input_pair = HexUtil.HEX_POINTS_LEGEND["SIDE_QUARTER_PAIRS"][input]
+	var output_pair = HexUtil.HEX_POINTS_LEGEND["SIDE_QUARTER_PAIRS"][output]
+	var left_input = HexUtil.get_point_set(HexUtil.PointSet.EDGE_QUARTER_RIGHT)[input]
+	var left_output = HexUtil.get_point_set(HexUtil.PointSet.EDGE_QUARTER_LEFT)[output]
+	
+	#left.curve.add_point(input_pair[1])
+	#left.curve.add_point(output_pair[0])
+	left.curve.add_point(left_input)
+	left.curve.add_point(left_output)
+	right.curve.add_point(input_pair[0])
+	right.curve.add_point(output_pair[1])
+	
+	var diff = (output - input + 6) % 6
+	
+	if diff == 2 || diff == 4:
+		set_lines_sixty(left, right, input, output)
+	
+	if diff == 1 || diff == 5:
+		set_lines_thirty(left, right, input, output)
+
+static func set_lines_sixty(left: TransportLine, right: TransportLine, input: int, output: int):
+	var left_index
+	var right_index
+	var diff = (output - input + 6) % 6
+	if diff == 2:
+		left_index = (input + 1) % 6
+		right_index = (left_index + 3) % 6
+	else:
+		right_index = (input - 1) % 6
+		left_index = (right_index + 3) % 6
+		
+	var left_midpoint = HexUtil.HEX_POINTS_LEGEND["SMALL"][left_index]
+	left.curve.add_point(left_midpoint, Vector2.ZERO, Vector2.ZERO, 1)
+	
+	var right_midpoint = HexUtil.HEX_POINTS_LEGEND["SMALL"][right_index]
+	right.curve.add_point(right_midpoint, Vector2.ZERO, Vector2.ZERO, 1)
+	
+static func set_lines_thirty(left: TransportLine, right: TransportLine, input: int, output: int):
+	var point
+	var diff = (output - input + 6) % 6
+	if diff == 1:
+		var left_index = input
+		var left_midpoint = HexUtil.HEX_POINTS_LEGEND["MIDDLE_CENTER"][left_index]
+		left.curve.add_point(left_midpoint, Vector2.ZERO, Vector2.ZERO, 1)
+		
+		var right_index_1 = (left_index + 4) % 6
+		var right_index_2 = (left_index + 3) % 6
+		point = HexUtil.HEX_POINTS_LEGEND["SMALL"][right_index_1]
+		right.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 1)
+		point = HexUtil.HEX_POINTS_LEGEND["SMALL"][right_index_2]
+		right.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 2)
+	else:
+		var right_index = output
+		var right_midpoint = HexUtil.HEX_POINTS_LEGEND["MIDDLE_CENTER"][right_index]
+		right.curve.add_point(right_midpoint, Vector2.ZERO, Vector2.ZERO, 1)
+		
+		var left_index_1 = (right_index + 3) % 6
+		var left_index_2 = (right_index + 4) % 6
+		point = HexUtil.HEX_POINTS_LEGEND["SMALL"][left_index_1]
+		left.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 1)
+		point = HexUtil.HEX_POINTS_LEGEND["SMALL"][left_index_2]
+		left.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 2)

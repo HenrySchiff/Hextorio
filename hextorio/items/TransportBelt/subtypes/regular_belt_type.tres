@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BeltType" load_steps=2 format=3 uid="uid://divtrhw6oy1hc"]
+
+[ext_resource type="Script" uid="uid://civu7da5ukpw7" path="res://items/TransportBelt/subtypes/belt_type.gd" id="1_kfvjv"]
+
+[resource]
+script = ExtResource("1_kfvjv")
+belt_speed = 50
+underground_distance = 4
+color = Color(0.83, 0.744787, 0.1909, 1)
+metadata/_custom_type_script = "uid://civu7da5ukpw7"

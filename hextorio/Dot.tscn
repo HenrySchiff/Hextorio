@@ -3,6 +3,6 @@
 [node name="Dot" type="Polygon2D"]
 z_index = 200
 z_as_relative = false
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.1, 0.1)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(-15, -15, 15, -15, 15, 15, -15, 15)

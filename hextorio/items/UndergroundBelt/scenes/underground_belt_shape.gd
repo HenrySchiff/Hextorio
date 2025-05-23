@@ -12,7 +12,7 @@ func _rotate_whole(direction: int):
 	roof.rotate(direction * PI / 3.0)
 
 # underground belts shouldn't turn: override to do nothing
-func _rotate_end(direction: int):
+func _rotate_end(_direction: int):
 	set_entrance(!is_entrance)
 	pass
 

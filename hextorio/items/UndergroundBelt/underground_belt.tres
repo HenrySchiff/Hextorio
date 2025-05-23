@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="BeltType" load_steps=4 format=3 uid="uid://clvd8roamvcnm"]
+[gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://d0lhrx0mmjbi"]
 
-[ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/UndergroundBelt/UndergroundBelt.tscn" id="1_38ksl"]
-[ext_resource type="Script" uid="uid://civu7da5ukpw7" path="res://items/TransportBelt/belt_type.gd" id="1_d03xb"]
-[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/UndergroundBelt/UndergroundBeltShape.tscn" id="3_d88nc"]
+[ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_d03xb"]
+[ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/UndergroundBelt/scenes/UndergroundBelt.tscn" id="1_d88nc"]
+[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/UndergroundBelt/scenes/UndergroundBeltShape.tscn" id="3_ni3t2"]
+[ext_resource type="Resource" uid="uid://bvs6un37twhrc" path="res://items/TransportBelt/subtypes/fast_belt_type.tres" id="4_3vq4e"]
 
 [resource]
 script = ExtResource("1_d03xb")
-belt_speed = 50
-color = Color(0.83, 0.744787, 0.1909, 1)
-name = "Underground Belt"
-entity_scene = ExtResource("1_38ksl")
-shape_scene = ExtResource("3_d88nc")
-metadata/_custom_type_script = "uid://civu7da5ukpw7"
+name = "Fast Underground Belt"
+entity_scene = ExtResource("1_d88nc")
+shape_scene = ExtResource("3_ni3t2")
+subtype = ExtResource("4_3vq4e")
+metadata/_custom_type_script = "uid://51j7l6mrgks3"

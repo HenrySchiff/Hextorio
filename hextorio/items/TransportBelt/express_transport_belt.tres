@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="BeltType" load_steps=4 format=3 uid="uid://bo8nktnknckpv"]
+[gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://vigf0qnu6cmm"]
 
-[ext_resource type="Script" uid="uid://civu7da5ukpw7" path="res://items/TransportBelt/belt_type.gd" id="1_anqyj"]
 [ext_resource type="PackedScene" uid="uid://b3hrb4wlsklu7" path="res://items/TransportBelt/scenes/TransportBelt.tscn" id="1_hlsay"]
+[ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="2_etnfc"]
 [ext_resource type="PackedScene" uid="uid://c3r2ieij50lmm" path="res://items/TransportBelt/scenes/TransportBeltShape.tscn" id="3_etnfc"]
+[ext_resource type="Resource" uid="uid://r5fk71qlsbx8" path="res://items/TransportBelt/subtypes/express_belt_type.tres" id="4_etnfc"]
 
 [resource]
-script = ExtResource("1_anqyj")
-belt_speed = 200
-underground_distance = 8
-color = Color(0, 0.7025, 0.767466, 1)
+script = ExtResource("2_etnfc")
 name = "Express Transport Belt"
 entity_scene = ExtResource("1_hlsay")
 shape_scene = ExtResource("3_etnfc")
-metadata/_custom_type_script = "uid://civu7da5ukpw7"
+subtype = ExtResource("4_etnfc")
+metadata/_custom_type_script = "uid://51j7l6mrgks3"

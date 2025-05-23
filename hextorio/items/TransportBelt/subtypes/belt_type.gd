@@ -1,4 +1,4 @@
-class_name BeltType extends ItemType
+class_name BeltType extends Resource
 
 @export var belt_speed: int = 50
 @export var underground_distance: int = 4
