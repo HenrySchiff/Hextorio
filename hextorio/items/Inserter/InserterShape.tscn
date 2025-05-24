@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ov1w6ikcgm4f"]
 
-[ext_resource type="Script" uid="uid://dqdkhcp0g3yxp" path="res://items/Inserter/inserter_shape.gd" id="1_kgirp"]
+[ext_resource type="Script" uid="uid://dqdkhcp0g3yxp" path="res://items/inserter/inserter_shape.gd" id="1_kgirp"]
 
 [node name="InserterShape" type="Polygon2D"]
 z_index = 1

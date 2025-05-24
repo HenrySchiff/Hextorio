@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://3oqwwuwr5eii"]
 
-[ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/UndergroundBelt/scenes/UndergroundBelt.tscn" id="1_yofrl"]
+[ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/underground_belt/scenes/UndergroundBelt.tscn" id="1_yofrl"]
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="2_mo1di"]
-[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/UndergroundBelt/scenes/UndergroundBeltShape.tscn" id="3_dfi1t"]
-[ext_resource type="Resource" uid="uid://divtrhw6oy1hc" path="res://items/TransportBelt/subtypes/regular_belt_type.tres" id="4_7s53q"]
+[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/underground_belt/scenes/UndergroundBeltShape.tscn" id="3_dfi1t"]
+[ext_resource type="Resource" uid="uid://divtrhw6oy1hc" path="res://items/transport_belt/subtypes/regular_belt_type.tres" id="4_7s53q"]
 
 [resource]
 script = ExtResource("2_mo1di")

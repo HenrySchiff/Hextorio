@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3hrb4wlsklu7"]
 
-[ext_resource type="Script" uid="uid://boc1v6kxnt30y" path="res://items/TransportBelt/scenes/transport_belt.gd" id="1_cwk5p"]
+[ext_resource type="Script" uid="uid://boc1v6kxnt30y" path="res://items/transport_belt/scenes/transport_belt.gd" id="1_cwk5p"]
 [ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic_components/TransportLine.tscn" id="3_ox3t2"]
 
 [sub_resource type="Curve2D" id="Curve2D_bwsfr"]

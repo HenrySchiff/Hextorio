@@ -8,8 +8,6 @@ func _ready() -> void:
 	var belt_type: BeltType = item_type.subtype as BeltType
 	belt_speed = belt_type.belt_speed
 	
-	#left_transport_line.belt_speed = belt_speed
-	#right_transport_line.belt_speed = belt_speed
 	$LeftInput/LeftLine.next_line = $LeftOutput/LeftLine
 	$LeftInput/RightLine.next_line = $LeftOutput/RightLine
 	$RightInput/LeftLine.next_line = $RightOutput/LeftLine

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://basj7u48iubxx"]
 
 [ext_resource type="Script" uid="uid://c5myen7ijs6s0" path="res://items/item.gd" id="1_r0jyl"]
-[ext_resource type="Resource" uid="uid://d0cx0wft6b6jv" path="res://items/IronPlate/iron_plate.tres" id="2_h46kb"]
+[ext_resource type="Resource" uid="uid://d0cx0wft6b6jv" path="res://items/iron_plate/iron_plate.tres" id="2_h46kb"]
 
 [node name="Item" type="Node2D"]
 z_index = 100

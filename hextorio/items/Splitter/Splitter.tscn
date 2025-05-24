@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c322y8ik0ncqs"]
 
-[ext_resource type="Script" uid="uid://brh34mgac62ay" path="res://items/Splitter/splitter.gd" id="1_86umy"]
+[ext_resource type="Script" uid="uid://brh34mgac62ay" path="res://items/splitter/splitter.gd" id="1_86umy"]
 [ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic_components/TransportLine.tscn" id="2_awhlu"]
 
 [sub_resource type="Curve2D" id="Curve2D_qi6e3"]

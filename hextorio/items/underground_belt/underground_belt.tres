@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://d0lhrx0mmjbi"]
 
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_d03xb"]
-[ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/UndergroundBelt/scenes/UndergroundBelt.tscn" id="1_d88nc"]
-[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/UndergroundBelt/scenes/UndergroundBeltShape.tscn" id="3_ni3t2"]
-[ext_resource type="Resource" uid="uid://bvs6un37twhrc" path="res://items/TransportBelt/subtypes/fast_belt_type.tres" id="4_3vq4e"]
+[ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/underground_belt/scenes/UndergroundBelt.tscn" id="1_d88nc"]
+[ext_resource type="PackedScene" uid="uid://bvibdaxtx6552" path="res://items/underground_belt/scenes/UndergroundBeltShape.tscn" id="3_ni3t2"]
+[ext_resource type="Resource" uid="uid://bvs6un37twhrc" path="res://items/transport_belt/subtypes/fast_belt_type.tres" id="4_3vq4e"]
 
 [resource]
 script = ExtResource("1_d03xb")

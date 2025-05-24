@@ -8,16 +8,16 @@ extends Node2D
 
 var item_scene: PackedScene = preload("res://items/Item.tscn")
 
-var transport_belt: ItemType = preload("res://items/TransportBelt/transport_belt.tres")
-var inserter: ItemType = preload("res://items/Inserter/inserter.tres")
-var assembling_machine: ItemType = preload("res://items/AssemblingMachine/assembling_machine.tres")
-var iron_plate: ItemType = preload("res://items/IronPlate/iron_plate.tres")
-var copper_plate: ItemType = preload("res://items/CopperPlate/copper_plate.tres")
-var underground_belt: ItemType = preload("res://items/UndergroundBelt/underground_belt.tres")
-var fast_underground_belt: ItemType = preload("res://items/UndergroundBelt/fast_underground_belt.tres")
-var fast_transport_belt: ItemType = preload("res://items/TransportBelt/fast_transport_belt.tres")
-var express_transport_belt: ItemType = preload("res://items/TransportBelt/express_transport_belt.tres")
-var splitter: ItemType = preload("res://items/Splitter/splitter.tres")
+var transport_belt: ItemType = preload("res://items/transport_belt/transport_belt.tres")
+var inserter: ItemType = preload("res://items/inserter/inserter.tres")
+var assembling_machine: ItemType = preload("res://items/assembling_machine/assembling_machine.tres")
+var iron_plate: ItemType = preload("res://items/iron_plate/iron_plate.tres")
+var copper_plate: ItemType = preload("res://items/copper_plate/copper_plate.tres")
+var underground_belt: ItemType = preload("res://items/underground_belt/underground_belt.tres")
+var fast_underground_belt: ItemType = preload("res://items/underground_belt/fast_underground_belt.tres")
+var fast_transport_belt: ItemType = preload("res://items/transport_belt/fast_transport_belt.tres")
+var express_transport_belt: ItemType = preload("res://items/transport_belt/express_transport_belt.tres")
+var splitter: ItemType = preload("res://items/splitter/splitter.tres")
 
 var selected_item_type: ItemType
 var selected_item_shape: Shape

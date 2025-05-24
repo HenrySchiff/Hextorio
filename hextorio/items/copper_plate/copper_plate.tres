@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://cwo74quv4gs4a"]
 
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_522tq"]
-[ext_resource type="PackedScene" uid="uid://dt3uaganlsvte" path="res://items/CopperPlate/CopperPlateShape.tscn" id="2_rmps4"]
+[ext_resource type="PackedScene" uid="uid://dt3uaganlsvte" path="res://items/copper_plate/CopperPlateShape.tscn" id="2_rmps4"]
 
 [resource]
 script = ExtResource("1_522tq")

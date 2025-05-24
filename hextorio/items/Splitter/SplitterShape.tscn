@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cklbl5ii75lw5"]
 
-[ext_resource type="Script" uid="uid://cgfagfol10isf" path="res://items/Splitter/splitter_shape.gd" id="1_srr6d"]
+[ext_resource type="Script" uid="uid://cgfagfol10isf" path="res://items/splitter/splitter_shape.gd" id="1_srr6d"]
 
 [node name="SplitterShape" type="Node2D"]
 z_index = 5

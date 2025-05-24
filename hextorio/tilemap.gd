@@ -8,8 +8,8 @@ var hex_tile_map: Dictionary[Vector2i, Vector2]
 # maps tile positions -> entities
 var entity_tile_map: Dictionary[Vector2i, Entity]
 
-# maps tile positions -> belt entities
-var belt_tile_map: Dictionary[Vector2i, BeltConnectable]
+# maps tile positions -> belt components
+var belt_tile_map: Dictionary[Vector2i, BeltComponent]
 
 
 func _ready():

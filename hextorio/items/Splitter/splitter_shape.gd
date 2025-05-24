@@ -2,7 +2,7 @@ class_name SplitterShape extends Shape
 
 @onready var rectangle: Polygon2D = $Rectangle
 
-var belt_type: ItemType = preload("res://items/TransportBelt/transport_belt.tres")
+var belt_type: ItemType = preload("res://items/transport_belt/transport_belt.tres")
 var left_belt_shape: TransportBeltShape 
 var right_belt_shape: TransportBeltShape 
 
