@@ -73,7 +73,7 @@ func rotate_polyhex(polyhex: Array[Vector2i], direction: int) -> Array[Vector2i]
 	return rotated_polyhex
 
 
-func generate_hex_grid(width: int, height: int) ->  Dictionary[Vector2i, Vector2]:
+func generate_hex_grid(width: int, height: int) -> Dictionary[Vector2i, Vector2]:
 	var grid: Dictionary[Vector2i, Vector2] = {}
 	var x_offset = 0
 	
@@ -96,48 +96,11 @@ func get_hex_points(radius: float, angle_offset: float = 0) -> Array[Vector2]:
 	
 	return hex_points
 
-func get_quarter_hex_points(radius):
-	var quarter_hex_points = []
-	var hex_points: Array[Vector2] = get_hex_points(radius)
-	
-	for i in range(6.0):
-		var offset: Vector2 = Vector2(0, HEX_SIZE / 4.0).rotated(i / 3.0 * PI)
-		quarter_hex_points.append([hex_points[i] - offset, hex_points[i] + offset])
-	
-	return quarter_hex_points
-
-
-# Defines a set of points around a hexagon at (0, 0)
-var HEX_POINTS_LEGEND = {
-	"SIDE_CENTER": get_hex_points(INNER_RADIUS),
-	"SIDE_QUARTER_PAIRS": get_quarter_hex_points(INNER_RADIUS),
-	"MIDDLE_CENTER": get_hex_points(OUTER_RADIUS / 2.0, PI / 6.0),
-	"SMALL": get_hex_points(OUTER_RADIUS * (sqrt(3.0) / 6.0))
-}
-
-enum PointSet {
-	VERTICES,				# BLACK
-	EDGE_MIDDLE,			# RED
-	EDGE_QUARTER_LEFT,		# ORANGE
-	EDGE_QUARTER_RIGHT,		# ORANGE
-	INNER_TURN,				# GREEN
-	OUTER_TURN,				# MAGENTA
-	CENTER					# YELLOW
-}
-
-func get_point_set(set_name: PointSet) -> Array[Vector2]:
-	match set_name:
-		PointSet.VERTICES:
-			return get_hex_points(OUTER_RADIUS, PI / 6.0)
-		PointSet.EDGE_MIDDLE:
-			return get_hex_points(INNER_RADIUS)
-		PointSet.EDGE_QUARTER_LEFT:
-			return get_hex_points(QUARTER_RADIUS, -QUARTER_ANGLE)
-		PointSet.EDGE_QUARTER_RIGHT:
-			return get_hex_points(QUARTER_RADIUS, QUARTER_ANGLE)
-		PointSet.INNER_TURN:
-			return get_hex_points(OUTER_RADIUS / 2.0, PI / 6.0)
-		PointSet.OUTER_TURN:
-			return get_hex_points(OUTER_RADIUS * (sqrt(3.0) / 6.0))
-	
-	return []
+# Commonly used hexagonal points around the origin
+var VERTICES:			Array[Vector2] = get_hex_points(OUTER_RADIUS, PI/6.0)					# BLACK
+var EDGE_MIDDLE:		Array[Vector2] = get_hex_points(INNER_RADIUS)							# RED
+var EDGE_QUARTER_LEFT:	Array[Vector2] = get_hex_points(QUARTER_RADIUS, -QUARTER_ANGLE)			# ORANGE
+var EDGE_QUARTER_RIGHT:	Array[Vector2] = get_hex_points(QUARTER_RADIUS, QUARTER_ANGLE)			# ORANGE
+var INNER_TURN:	 		Array[Vector2] = get_hex_points(OUTER_RADIUS/2.0, PI/6.0)				# GREEN
+var OUTER_TURN:	 		Array[Vector2] = get_hex_points(OUTER_RADIUS*(sqrt(3.0)/6.0))			# MAGENTA
+var CENTER_VERTICES:	Array[Vector2] = get_hex_points(INNER_RADIUS*(sqrt(3.0)/6.0), PI/6.0)	# YELLOW

@@ -10,20 +10,24 @@ func _ready() -> void:
 	
 	#left_transport_line.belt_speed = belt_speed
 	#right_transport_line.belt_speed = belt_speed
+	$LeftInput/LeftLine.next_line = $LeftOutput/LeftLine
+	$LeftInput/RightLine.next_line = $LeftOutput/RightLine
+	$RightInput/LeftLine.next_line = $RightOutput/LeftLine
+	$RightInput/RightLine.next_line = $RightOutput/RightLine
 
 func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
 	super(_shape, _tile_pos)
-	var belt_shape: SplitterShape = _shape as SplitterShape
+	var splitter_shape: SplitterShape = _shape as SplitterShape
 	
-	#var input = belt_shape.input_index
-	#var output = belt_shape.output_index
-	var input = 4
-	var output = 1
-	
-	TransportLine.set_lines($LeftInput/LeftLine, $LeftInput/RightLine, input, output)
-	TransportLine.set_lines($RightInput/LeftLine, $RightInput/RightLine, input, output)
-	TransportLine.set_lines($LeftOutput/LeftLine, $LeftOutput/RightLine, input, output)
-	TransportLine.set_lines($RightOutput/LeftLine, $RightOutput/RightLine, input, output)
+	var left_input = splitter_shape.left_belt_shape.input_index
+	var left_output = splitter_shape.left_belt_shape.output_index
+	var right_input = splitter_shape.right_belt_shape.input_index
+	var right_output = splitter_shape.right_belt_shape.output_index
 
-	$LeftInput/LeftLine.position.x += HexUtil.HEX_WIDTH
-	$LeftInput/RightLine.position.x += HexUtil.HEX_WIDTH
+	$RightInput.position = splitter_shape.right_belt_shape.position
+	$RightOutput.position = splitter_shape.right_belt_shape.position
+	
+	TransportLine.set_lines($LeftInput/LeftLine, $LeftInput/RightLine, left_input, -1)
+	TransportLine.set_lines($RightInput/LeftLine, $RightInput/RightLine, right_input, -1)
+	TransportLine.set_lines($LeftOutput/LeftLine, $LeftOutput/RightLine, -1, left_output)
+	TransportLine.set_lines($RightOutput/LeftLine, $RightOutput/RightLine, -1, right_output)

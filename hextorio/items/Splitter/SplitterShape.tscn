@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cgfagfol10isf" path="res://items/Splitter/splitter_shape.gd" id="1_srr6d"]
 
-[node name="SplitterShape" type="Polygon2D"]
+[node name="SplitterShape" type="Node2D"]
+z_index = 5
+z_as_relative = false
+script = ExtResource("1_srr6d")
+
+[node name="Rectangle" type="Polygon2D" parent="."]
 z_index = 5
 z_as_relative = false
 polygon = PackedVector2Array(-32, -15, 96, -15, 96, 15, -32, 15)
-script = ExtResource("1_srr6d")

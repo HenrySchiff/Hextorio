@@ -19,7 +19,7 @@ func _tile_update(tilemap: HexTileMap) -> void:
 	var current_tile: Vector2i = self.tile_position
 	for i in range(underground_distance + 1):
 		current_tile = tilemap.get_neighbor_pos(current_tile, shape.input_index)
-		var entity: Entity = tilemap.get_scene_tile(current_tile)
+		var entity: Entity = tilemap.get_entity(current_tile)
 		if !(entity is UndergroundBelt):
 			continue
 		if (entity.shape.output_index + 3) % 6 == shape.input_index && entity.shape.is_entrance:
@@ -30,16 +30,16 @@ func _tile_update(tilemap: HexTileMap) -> void:
 func connect_underground_belts(entrance_belt: UndergroundBelt, exit_belt: UndergroundBelt) -> void:
 	var x = (entrance_belt.shape.output_index + 1) % 6
 	var y = (entrance_belt.shape.output_index - 1) % 6
-	var entrance_middle_left: Vector2 = HexUtil.HEX_POINTS_LEGEND["SMALL"][y]
-	var entrance_middle_right: Vector2 = HexUtil.HEX_POINTS_LEGEND["SMALL"][x]
+	var entrance_middle_left: Vector2 = HexUtil.OUTER_TURN[y]
+	var entrance_middle_right: Vector2 = HexUtil.OUTER_TURN[x]
 	
 	entrance_belt.left_transport_line.curve.set_point_position(1, entrance_middle_left)
 	entrance_belt.right_transport_line.curve.set_point_position(1, entrance_middle_right)
 	
 	var w = (exit_belt.shape.input_index - 1) % 6
 	var z = (exit_belt.shape.input_index + 1) % 6
-	var exit_middle_left: Vector2 = HexUtil.HEX_POINTS_LEGEND["SMALL"][z]
-	var exit_middle_right: Vector2 = HexUtil.HEX_POINTS_LEGEND["SMALL"][w]
+	var exit_middle_left: Vector2 = HexUtil.OUTER_TURN[z]
+	var exit_middle_right: Vector2 = HexUtil.OUTER_TURN[w]
 	
 	exit_belt.left_transport_line.curve.set_point_position(0, exit_middle_left)
 	exit_belt.right_transport_line.curve.set_point_position(0, exit_middle_right)

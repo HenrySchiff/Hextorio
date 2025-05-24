@@ -33,7 +33,6 @@ func _tile_update(tilemap: HexTileMap) -> void:
 	if next.shape.input_index != (shape.output_index + 3) % 6: 
 		return
 		
-	#next_belt = next
 	left_transport_line.next_line = next.left_transport_line
 	right_transport_line.next_line = next.right_transport_line
 

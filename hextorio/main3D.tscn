@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbbndqi6lmfye"]
+
+[ext_resource type="PackedScene" uid="uid://bcju3s11fa3ai" path="res://main.tscn" id="1_m8bx5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m8bx5"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Main3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.840321, 0.54209, 0, -0.54209, 0.840321, 0, 1.71128, 2.94441)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+texture = SubResource("ViewportTexture_m8bx5")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1280, 720)
+
+[node name="Main" parent="SubViewport" instance=ExtResource("1_m8bx5")]

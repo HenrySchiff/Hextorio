@@ -56,13 +56,13 @@ func _process(_delta: float) -> void:
 	var tile = HexUtil.screen_to_hex(get_global_mouse_position())
 	
 	if Input.is_action_just_pressed("pipette"):
-		var entity: Entity = tilemap.get_scene_tile(tile)
+		var entity: Entity = tilemap.get_entity(tile)
 		var item_type = entity.item_type if entity else null
 		select_item(item_type)
 		#selected_item_shape._copy(entity.shape)
 	
 	if Input.is_action_pressed("remove"):
-		if tilemap.remove_scene_tile(tile):
+		if tilemap.remove_entity(tile):
 			deconstruct_audio.position = mouse
 			deconstruct_audio.play()
 	
@@ -91,14 +91,14 @@ func _process(_delta: float) -> void:
 		selected_item_shape._flip_horizontal()
 	
 	if Input.is_action_pressed("place"):
-		if tilemap.get_scene_tile(tile):
+		if tilemap.get_entity(tile):
 			return
 		
 		if !selected_item_type.entity_scene:
 			return
 		
 		var entity: Entity = Entity.new_entity(selected_item_type)
-		tilemap.set_scene_tile(tile, entity, selected_item_shape.occupied_tiles)
+		tilemap.set_entity(tile, entity, selected_item_shape.occupied_tiles)
 		
 		entity._sync_shape(selected_item_shape, tile)
 		entity._tile_update(tilemap)
@@ -108,7 +108,7 @@ func _process(_delta: float) -> void:
 		build_audio.play()
 		
 	if Input.is_action_just_pressed("drop"):
-		var entity = tilemap.get_scene_tile(tile)
+		var entity = tilemap.get_entity(tile)
 		
 		if !(entity is TransportBelt):
 			return
