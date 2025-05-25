@@ -8,6 +8,7 @@ z_as_relative = false
 script = ExtResource("1_srr6d")
 
 [node name="Rectangle" type="Polygon2D" parent="."]
-z_index = 5
+z_index = 300
 z_as_relative = false
+color = Color(0.513233, 0.513233, 0.513233, 1)
 polygon = PackedVector2Array(-32, -15, 96, -15, 96, 15, -32, 15)

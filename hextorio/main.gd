@@ -98,9 +98,10 @@ func _process(_delta: float) -> void:
 			return
 		
 		var entity: Entity = Entity.new_entity(selected_item_type)
-		tilemap.set_entity(tile, entity, selected_item_shape.occupied_tiles)
-		
+		tilemap.set_entity(tile, entity)
 		entity._sync_shape(selected_item_shape, tile)
+		tilemap.set_entity_tiles(entity)
+		
 		entity._tile_update(tilemap)
 		tilemap.update_neighbors(tile)
 		
@@ -108,13 +109,9 @@ func _process(_delta: float) -> void:
 		build_audio.play()
 		
 	if Input.is_action_just_pressed("drop"):
-		var entity = tilemap.get_entity(tile)
-		
-		if !(entity is TransportBelt):
-			return
-		
-		var belt = entity as TransportBelt
-		belt.attempt_item_place(selected_item_type, mouse)
+		var belt_comp: BeltComponent = tilemap.get_belt_component(tile)
+		if !belt_comp: return
+		belt_comp.attempt_item_place(selected_item_type, mouse)
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.keycode >= KEY_0 && event.keycode <= KEY_9:

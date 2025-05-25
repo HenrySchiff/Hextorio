@@ -2,7 +2,8 @@ class_name Entity extends Node2D
 
 var item_type: ItemType
 var shape: Shape
-var tile_position: Vector2i
+var tile_position: Vector2i # global tile position
+var belt_components: Array[BeltComponent]
 
 static func new_entity(_item_type: ItemType) -> Entity:
 	var entity = _item_type.entity_scene.instantiate()

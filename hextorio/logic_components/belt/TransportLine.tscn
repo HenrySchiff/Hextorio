@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5sslptstheoc"]
 
-[ext_resource type="Script" uid="uid://d17labgx6102s" path="res://logic_components/transport_line.gd" id="1_qpi3h"]
+[ext_resource type="Script" uid="uid://d17labgx6102s" path="res://logic_components/belt/transport_line.gd" id="1_qpi3h"]
 
 [sub_resource type="Curve2D" id="Curve2D_pf2xt"]
 resource_local_to_scene = true

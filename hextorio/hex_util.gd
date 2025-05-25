@@ -72,6 +72,16 @@ func rotate_polyhex(polyhex: Array[Vector2i], direction: int) -> Array[Vector2i]
 		rotated_polyhex.append(rotate_hex_vector(vec, direction))
 	return rotated_polyhex
 
+func get_polyhex_neighbors(polyhex: Array[Vector2i]) -> Array[Vector2i]:
+	var neighbors: Array[Vector2i] = []
+	for pos in polyhex:
+		for n in NEIGHBORS:
+			var n_pos: Vector2i = pos + n
+			if neighbors.has(n_pos) || polyhex.has(n_pos):
+				continue
+			neighbors.append(n_pos)
+	return neighbors
+
 
 func generate_hex_grid(width: int, height: int) -> Dictionary[Vector2i, Vector2]:
 	var grid: Dictionary[Vector2i, Vector2] = {}

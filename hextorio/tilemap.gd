@@ -29,18 +29,26 @@ func _draw():
 			#dot.position = center + v
 			#add_child(dot)
 
-func set_entity(pos: Vector2i, entity: Entity, occupied_tiles: Array[Vector2i]) -> void:
+
+func set_entity(pos: Vector2i, entity: Entity) -> void:
 	self.add_child(entity)
 	entity.tile_position = pos
-	
-	for relative_pos in occupied_tiles:
-		var tile: Vector2i = pos + relative_pos
+
+# This requires the entity to already have it's shape data, so it must be called after ._sync_shape()
+func set_entity_tiles(entity: Entity) -> void:
+	for relative_pos in entity.shape.occupied_tiles:
+		var tile: Vector2i = entity.tile_position + relative_pos
 		
 		var prev_entity: Entity = entity_tile_map.get(tile)
 		if prev_entity:
 			remove_entity(tile)
-			
+		
 		entity_tile_map[tile] = entity
+	
+	for belt_comp in entity.belt_components:
+		var belt_pos: Vector2i = entity.tile_position + belt_comp.relative_position
+		belt_tile_map[belt_pos] = belt_comp
+		belt_comp.tile_position = belt_pos
 
 func remove_entity(pos: Vector2i) -> bool:
 	var entity: Entity = entity_tile_map.get(pos)
@@ -50,11 +58,17 @@ func remove_entity(pos: Vector2i) -> bool:
 		var tile: Vector2i = entity.tile_position + relative_pos
 		entity_tile_map.erase(tile)
 	
+	for belt_comp in entity.belt_components:
+		belt_tile_map.erase(belt_comp.tile_position)
+	
 	entity.queue_free()
 	return true
 	
 func get_entity(pos: Vector2i) -> Entity:
 	return entity_tile_map.get(pos)
+	
+func get_belt_component(pos: Vector2i) -> BeltComponent:
+	return belt_tile_map.get(pos)
 	
 func get_neighbor_pos(pos: Vector2i, n_index: int) -> Vector2i:
 	return pos + HexUtil.NEIGHBORS[n_index]
@@ -62,8 +76,15 @@ func get_neighbor_pos(pos: Vector2i, n_index: int) -> Vector2i:
 func get_neighbor(pos: Vector2i, n_index: int) -> Entity:
 	return entity_tile_map.get(get_neighbor_pos(pos, n_index))
 	
+func get_neighbor_belt(pos: Vector2i, n_index: int) -> BeltComponent:
+	return belt_tile_map.get(get_neighbor_pos(pos, n_index))
+
+# updates an entity's neighboring entities
 func update_neighbors(pos: Vector2i) -> void:
-	for i in range(HexUtil.NEIGHBORS.size()):
-		var entity: Entity = get_neighbor(pos, i)
-		if !entity: continue
-		entity._tile_update(self)
+	var entity: Entity = get_entity(pos)
+	if !entity: return
+	
+	for n_pos in HexUtil.get_polyhex_neighbors(entity.shape.occupied_tiles):
+		var neighbor: Entity = get_entity(pos + n_pos)
+		if !neighbor: continue
+		neighbor._tile_update(self)
