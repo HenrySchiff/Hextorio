@@ -106,7 +106,7 @@ func get_hex_points(radius: float, angle_offset: float = 0) -> Array[Vector2]:
 	
 	return hex_points
 
-# Commonly used hexagonal points around the origin
+# commonly used hexagonal points around the origin
 var VERTICES:			Array[Vector2] = get_hex_points(OUTER_RADIUS, PI/6.0)					# BLACK
 var EDGE_MIDDLE:		Array[Vector2] = get_hex_points(INNER_RADIUS)							# RED
 var EDGE_QUARTER_LEFT:	Array[Vector2] = get_hex_points(QUARTER_RADIUS, -QUARTER_ANGLE)			# ORANGE
@@ -114,3 +114,16 @@ var EDGE_QUARTER_RIGHT:	Array[Vector2] = get_hex_points(QUARTER_RADIUS, QUARTER_
 var INNER_TURN:	 		Array[Vector2] = get_hex_points(OUTER_RADIUS/2.0, PI/6.0)				# GREEN
 var OUTER_TURN:	 		Array[Vector2] = get_hex_points(OUTER_RADIUS*(sqrt(3.0)/6.0))			# MAGENTA
 var CENTER_VERTICES:	Array[Vector2] = get_hex_points(INNER_RADIUS*(sqrt(3.0)/6.0), PI/6.0)	# YELLOW
+
+
+# corresponds to indices of inputs and outputs, i.e. EAST is the 0th index
+enum HexDirection {
+	EAST, SOUTHEAST, SOUTHWEST, WEST, NORTHWEST, NORTHEAST
+}
+
+func is_opposite_dir(a: HexDirection, b: HexDirection) -> bool:
+	return a == (b + 3) % 6
+
+func is_adjacent_dir(a: HexDirection, b: HexDirection) -> bool:
+	var difference: int = posmod(a - b, 6)
+	return difference == 1 || difference == 5

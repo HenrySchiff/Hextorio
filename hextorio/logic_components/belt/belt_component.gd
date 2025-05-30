@@ -39,7 +39,7 @@ func _ready() -> void:
 			all_lines = [left_line, right_line]
 			input_lines = all_lines
 			output_lines = all_lines
-			
+		
 		PairType.TWO_PAIR:
 			left_input_line = transport_line_scene.instantiate()
 			left_output_line = transport_line_scene.instantiate()
@@ -173,8 +173,8 @@ func set_lines_thirty(input: int, output: int) -> void:
 		var right_index_1 = (left_index + 4) % 6
 		var right_index_2 = (left_index + 3) % 6
 		point = HexUtil.OUTER_TURN[right_index_1]
-		point = HexUtil.OUTER_TURN[right_index_2]
 		right_line.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 1)
+		point = HexUtil.OUTER_TURN[right_index_2]
 		right_line.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 2)
 	else:
 		var right_index = output
@@ -184,8 +184,8 @@ func set_lines_thirty(input: int, output: int) -> void:
 		var left_index_1 = (right_index + 3) % 6
 		var left_index_2 = (right_index + 4) % 6
 		point = HexUtil.OUTER_TURN[left_index_1]
-		point = HexUtil.OUTER_TURN[left_index_2]
 		left_line.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 1)
+		point = HexUtil.OUTER_TURN[left_index_2]
 		left_line.curve.add_point(point, Vector2.ZERO, Vector2.ZERO, 2)
 
 # for two pairs of lines; sets the input and output pairs to meet in the center

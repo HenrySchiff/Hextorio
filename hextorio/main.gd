@@ -1,12 +1,10 @@
-extends Node2D
+class_name Main extends Node2D
 
 @onready var tilemap: HexTileMap = $HexTileMap
 @onready var camera: Camera2D = $Camera2D
 @onready var hotbar: Hotbar = $CanvasLayer/Hotbar
 @onready var build_audio: AudioStreamPlayer2D = $BuildAudioPlayer
 @onready var deconstruct_audio: AudioStreamPlayer2D = $DeconstructAudioPlayer
-
-var item_scene: PackedScene = preload("res://items/Item.tscn")
 
 var transport_belt: ItemType = preload("res://items/transport_belt/transport_belt.tres")
 var inserter: ItemType = preload("res://items/inserter/inserter.tres")
@@ -18,6 +16,7 @@ var fast_underground_belt: ItemType = preload("res://items/underground_belt/fast
 var fast_transport_belt: ItemType = preload("res://items/transport_belt/fast_transport_belt.tres")
 var express_transport_belt: ItemType = preload("res://items/transport_belt/express_transport_belt.tres")
 var splitter: ItemType = preload("res://items/splitter/splitter.tres")
+var balancer: ItemType = preload("res://items/balancer/balancer.tres")
 
 var selected_item_type: ItemType
 var selected_item_shape: Shape
@@ -49,22 +48,37 @@ func _ready():
 	hotbar.set_slot_item(6, copper_plate)
 	hotbar.set_slot_item(7, inserter)
 	hotbar.set_slot_item(8, assembling_machine)
-	hotbar.set_slot_item(9, splitter)
+	hotbar.set_slot_item(9, balancer)
 
 func _process(_delta: float) -> void:
 	var mouse: Vector2 = get_global_mouse_position()
 	var tile = HexUtil.screen_to_hex(get_global_mouse_position())
+	var entity = tilemap.get_entity(tile)
 	
 	if Input.is_action_just_pressed("pipette"):
-		var entity: Entity = tilemap.get_entity(tile)
-		var item_type = entity.item_type if entity else null
-		select_item(item_type)
-		#selected_item_shape._copy(entity.shape)
+		if entity:
+			select_item(entity.item_type)
+			selected_item_shape._copy(entity.shape)
+		else:
+			select_item(null)
 	
 	if Input.is_action_pressed("remove"):
 		if tilemap.remove_entity(tile):
 			deconstruct_audio.position = mouse
 			deconstruct_audio.play()
+			
+	if Input.is_action_just_pressed("rotate"):
+		var direction = -1 if Input.is_action_pressed("shift") else 1
+		var rotating_shape = entity.shape if entity else selected_item_shape
+		
+		if !selected_item_type && !entity:
+			return
+		
+		if Input.is_action_pressed("control"):
+			rotating_shape._rotate_end(direction)
+			return
+			
+		rotating_shape._rotate_whole(direction)
 	
 	if !selected_item_type: 
 		return
@@ -73,15 +87,6 @@ func _process(_delta: float) -> void:
 		selected_item_shape.position = HexUtil.hex_to_screen(tile)
 	else:
 		selected_item_shape.position = mouse + Vector2(10, 10)
-	
-	if Input.is_action_just_pressed("rotate"):
-		var direction = -1 if Input.is_action_pressed("shift") else 1
-		
-		if Input.is_action_pressed("control"):
-			selected_item_shape._rotate_end(direction)
-			return
-			
-		selected_item_shape._rotate_whole(direction)
 		
 	var shift: bool = Input.is_action_pressed("shift")
 	if selected_item_shape is UndergroundBeltShape:
@@ -97,12 +102,12 @@ func _process(_delta: float) -> void:
 		if !selected_item_type.entity_scene:
 			return
 		
-		var entity: Entity = Entity.new_entity(selected_item_type)
-		tilemap.set_entity(tile, entity)
-		entity._sync_shape(selected_item_shape, tile)
-		tilemap.set_entity_tiles(entity)
+		var new_entity: Entity = Entity.new_entity(selected_item_type)
+		tilemap.set_entity(tile, new_entity)
+		new_entity._sync_shape(selected_item_shape, tile)
+		tilemap.set_entity_tiles(new_entity)
 		
-		entity._tile_update(tilemap)
+		new_entity._tile_update(tilemap)
 		tilemap.update_neighbors(tile)
 		
 		build_audio.position = selected_item_shape.position

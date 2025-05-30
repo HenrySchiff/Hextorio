@@ -43,3 +43,37 @@ HexagonalTileMap extends Node2D
 | entity_tile_map: Dictionary[Vector2i, Entity]
 |
 | local_to_map(Vector2) -> Vector2i
+
+
+##################################################
+
+// An entity can have multiple belt components,
+// but only one belt component can exist per tile.
+// A belt component can have up to six transport line pairs
+BeltComponent extends Node2D
+|
+| // indices of the inputs and outputs to this belt component
+| inputs:  Array[TransportLinePair] // size of 6, initially all null
+| outputs: Array[TransportLinePair] // size of 6, initially all null
+|
+| (child nodes): TransportLinePairs+
+
+TransportLinePair extends Node2D
+|
+| left_transport_line:  TransportLine
+| right_transport_line: TransportLine
+
+
+TransportLine extends Path2D
+
+
+
+
+
+
+
+
+
+
+
+

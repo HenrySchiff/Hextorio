@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx71mwk2yonrt"]
+
+[ext_resource type="Script" uid="uid://dr88n7vo36ojs" path="res://items/balancer/balancer_shape.gd" id="1_1lifs"]
+
+[node name="DividerShape" type="Polygon2D"]
+color = Color(0.497474, 0.497474, 0.497474, 1)
+polygon = PackedVector2Array(32, 18.475, 0, 36.95, -32, 18.475, -32, -18.475, 0, -36.95, 32, -18.475)
+script = ExtResource("1_1lifs")

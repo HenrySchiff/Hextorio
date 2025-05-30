@@ -37,15 +37,14 @@ func _process(_delta: float) -> void:
 
 	for i in range(arrows.size()):
 		arrows[i].progress = fmod(base_progress + i * offset, 96.0) * (belt_speed / 50.0)
-		
 
 func _copy(other: Shape):
 	super(other)
 	var other_belt: TransportBeltShape = other as TransportBeltShape
-	self.set_belt_line(other_belt.belt_line)
-	#self.sync_arrows(other_belt)
+	#self.set_belt_line(other_belt.belt_line)
 	self.input_index = other.input_index
 	self.output_index = other.output_index
+	self.update_belt_line()
 
 func _rotate_whole(direction: int):
 	output_index = posmod(output_index + direction, 6)
