@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy7a434l13fbk"]
+
+[ext_resource type="Script" uid="uid://coyllaabqxjni" path="res://interface/entity_placer.gd" id="1_jpa3i"]
+[ext_resource type="AudioStream" uid="uid://by4nilec608lh" path="res://assets/audio/build-small.ogg" id="2_4c6kl"]
+[ext_resource type="AudioStream" uid="uid://47cx0atktfxk" path="res://assets/audio/deconstruct-small.ogg" id="3_x6uoa"]
+
+[node name="EntityPlacer" type="Node2D"]
+script = ExtResource("1_jpa3i")
+
+[node name="BuildAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_4c6kl")
+volume_db = -15.0
+
+[node name="DeconstructAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_x6uoa")
+volume_db = -15.0

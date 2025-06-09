@@ -24,11 +24,22 @@ func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
 	var right_input = splitter_shape.right_belt_shape.input_index
 	var right_output = splitter_shape.right_belt_shape.output_index
 	
-	left_belt_comp.set_lines_two_pair(left_input, left_output)
-	right_belt_comp.set_lines_two_pair(right_input, right_output)
+	left_belt_comp.set_pair(left_input, left_output)
+	right_belt_comp.set_pair(right_input, right_output)
 	
-	left_belt_comp.set_internal_next_belt(right_belt_comp)
-	right_belt_comp.set_internal_next_belt(left_belt_comp)
+	var left_input_pair = left_belt_comp.pair_map[left_input]
+	var left_output_pair = left_belt_comp.pair_map[left_output]
+	var right_input_pair = right_belt_comp.pair_map[right_input]
+	var right_output_pair = right_belt_comp.pair_map[right_output]
+	
+	left_input_pair.set_next_split_lines(left_output_pair, right_output_pair)
+	right_input_pair.set_next_split_lines(right_output_pair, left_output_pair)
+	
+	#left_belt_comp.set_lines_two_pair(left_input, left_output)
+	#right_belt_comp.set_lines_two_pair(right_input, right_output)
+	#
+	#left_belt_comp.set_internal_next_belt(right_belt_comp)
+	#right_belt_comp.set_internal_next_belt(left_belt_comp)
 
 
 func _tile_update(tilemap: HexTileMap) -> void:

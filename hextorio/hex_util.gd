@@ -121,8 +121,11 @@ enum HexDirection {
 	EAST, SOUTHEAST, SOUTHWEST, WEST, NORTHWEST, NORTHEAST
 }
 
+func get_opposite_dir(dir: HexDirection) -> HexDirection:
+	return (dir + 3) % 6
+
 func is_opposite_dir(a: HexDirection, b: HexDirection) -> bool:
-	return a == (b + 3) % 6
+	return a == get_opposite_dir(b)
 
 func is_adjacent_dir(a: HexDirection, b: HexDirection) -> bool:
 	var difference: int = posmod(a - b, 6)

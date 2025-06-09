@@ -1,9 +1,9 @@
 class_name UndergroundBelt extends TransportBelt
 
-static var belt_component_scene: PackedScene = preload("res://logic_components/belt/BeltComponent.tscn")
+static var transport_line_pair_scene: PackedScene = preload("res://logic_components/belt/TransportLinePair.tscn")
 
 var related_underground: UndergroundBelt
-var underground_belt_comp: BeltComponent
+var underground_pair: TransportLinePair
 
 func _ready() -> void:
 	super()
@@ -21,7 +21,7 @@ func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
 	var input = belt_shape.input_index if belt_shape.is_entrance else -1
 	var output = belt_shape.output_index if !belt_shape.is_entrance else -1
 		
-	belt_comp.set_lines(input, output)
+	belt_comp.set_pair(input, output)
 
 func _tile_update(tilemap: HexTileMap) -> void:		
 	super(tilemap)
@@ -43,10 +43,10 @@ func connect_underground_belts(entrance_belt: UndergroundBelt, exit_belt: Underg
 	entrance_belt.related_underground = exit_belt
 	exit_belt.related_underground = entrance_belt
 	
-	underground_belt_comp = belt_component_scene.instantiate()
-	add_child(underground_belt_comp)
-	underground_belt_comp.set_belt_speed(belt_type.belt_speed)
-	underground_belt_comp.visible = false
+	underground_pair = transport_line_pair_scene.instantiate()
+	add_child(underground_pair)
+	underground_pair.set_belt_speed(belt_type.belt_speed)
+	#underground_pair.visible = false
 	
 	var left_input: Vector2 = HexUtil.CENTER_VERTICES[(entrance_belt.shape.output_index - 2) % 6]
 	var left_output: Vector2 = HexUtil.CENTER_VERTICES[(entrance_belt.shape.input_index + 1) % 6]
@@ -57,13 +57,13 @@ func connect_underground_belts(entrance_belt: UndergroundBelt, exit_belt: Underg
 	left_input -= exit_belt.position - entrance_belt.position
 	right_input -= exit_belt.position - entrance_belt.position
 	
-	underground_belt_comp.left_line.curve.set_point_position(0, left_input)
-	underground_belt_comp.left_line.curve.set_point_position(1, left_output)
-	underground_belt_comp.right_line.curve.set_point_position(0, right_input)
-	underground_belt_comp.right_line.curve.set_point_position(1, right_output)
+	underground_pair.left_line.curve.set_point_position(0, left_input)
+	underground_pair.left_line.curve.set_point_position(1, left_output)
+	underground_pair.right_line.curve.set_point_position(0, right_input)
+	underground_pair.right_line.curve.set_point_position(1, right_output)
 	
-	entrance_belt.belt_comp.set_next_belt(underground_belt_comp)
-	underground_belt_comp.set_next_belt(exit_belt.belt_comp)
+	entrance_belt.belt_comp.get_child(0).set_next_lines(underground_pair)
+	underground_pair.set_next_lines(exit_belt.belt_comp.get_child(0))
 
 func disconnect_underground_belts(belt1: UndergroundBelt, belt2: UndergroundBelt) -> void:
 	if !belt1 || !belt2:
@@ -74,4 +74,4 @@ func disconnect_underground_belts(belt1: UndergroundBelt, belt2: UndergroundBelt
 	
 	entrance_belt.related_underground = null
 	exit_belt.related_underground = null
-	exit_belt.underground_belt_comp.queue_free()
+	exit_belt.underground_pair.queue_free()

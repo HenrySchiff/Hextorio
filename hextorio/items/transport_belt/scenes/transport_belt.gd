@@ -19,7 +19,14 @@ func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
 	var input = belt_shape.input_index
 	var output = belt_shape.output_index
 	
-	belt_comp.set_lines(input, output)
+	belt_comp.set_pair(input, output)
 
 func _tile_update(tilemap: HexTileMap) -> void:
 	belt_comp.tile_update(tilemap)
+
+func _inspect() -> void:
+	print(belt_comp.pair_map)
+	for pair in belt_comp.pair_map:
+		if !pair: continue
+		print(pair.left_line.next_line)
+		print(pair.right_line.next_line)

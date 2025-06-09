@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmyf3bmjd8f1n"]
+[gd_scene load_steps=5 format=3 uid="uid://bmyf3bmjd8f1n"]
 
 [ext_resource type="Script" uid="uid://dedeonunvld8i" path="res://logic_components/belt/transport_line_pair.gd" id="1_jywpr"]
+[ext_resource type="PackedScene" uid="uid://b5sslptstheoc" path="res://logic_components/belt/TransportLine.tscn" id="2_8m2yd"]
+
+[sub_resource type="Curve2D" id="Curve2D_h46p3"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_bkd0s"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 32, 0)
+}
+point_count = 2
 
 [node name="TransportLinePair" type="Node2D"]
 script = ExtResource("1_jywpr")
+
+[node name="LeftTransportLine" parent="." instance=ExtResource("2_8m2yd")]
+curve = SubResource("Curve2D_h46p3")
+
+[node name="RightTransportLine" parent="." instance=ExtResource("2_8m2yd")]
+curve = SubResource("Curve2D_bkd0s")

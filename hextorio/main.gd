@@ -46,14 +46,14 @@ func _ready():
 	hotbar.set_slot_item(4, express_transport_belt)
 	hotbar.set_slot_item(5, iron_plate)
 	hotbar.set_slot_item(6, copper_plate)
-	hotbar.set_slot_item(7, inserter)
+	hotbar.set_slot_item(7, splitter)
 	hotbar.set_slot_item(8, assembling_machine)
 	hotbar.set_slot_item(9, balancer)
 
 func _process(_delta: float) -> void:
 	var mouse: Vector2 = get_global_mouse_position()
-	var tile = HexUtil.screen_to_hex(get_global_mouse_position())
-	var entity = tilemap.get_entity(tile)
+	var tile: Vector2i = HexUtil.screen_to_hex(get_global_mouse_position())
+	var entity: Entity = tilemap.get_entity(tile)
 	
 	if Input.is_action_just_pressed("pipette"):
 		if entity:
@@ -80,18 +80,19 @@ func _process(_delta: float) -> void:
 			
 		rotating_shape._rotate_whole(direction)
 	
+	
 	if !selected_item_type: 
 		return
-		
+	
 	if selected_item_type.entity_scene:
 		selected_item_shape.position = HexUtil.hex_to_screen(tile)
 	else:
 		selected_item_shape.position = mouse + Vector2(10, 10)
-		
+	
 	var shift: bool = Input.is_action_pressed("shift")
 	if selected_item_shape is UndergroundBeltShape:
 		selected_item_shape.set_entrance(!shift)
-		
+	
 	if Input.is_action_just_pressed("flip_horizontal"):
 		selected_item_shape._flip_horizontal()
 	
@@ -112,11 +113,15 @@ func _process(_delta: float) -> void:
 		
 		build_audio.position = selected_item_shape.position
 		build_audio.play()
-		
+	
 	if Input.is_action_just_pressed("drop"):
 		var belt_comp: BeltComponent = tilemap.get_belt_component(tile)
-		if !belt_comp: return
-		belt_comp.attempt_item_place(selected_item_type, mouse)
+		if belt_comp:
+			belt_comp.attempt_item_place(selected_item_type, mouse)
+	
+	if Input.is_action_just_pressed("inspect"):
+		if entity:
+			entity._inspect()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.keycode >= KEY_0 && event.keycode <= KEY_9:

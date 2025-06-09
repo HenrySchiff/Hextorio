@@ -7,6 +7,4 @@
 script = ExtResource("1_0tr7m")
 
 [node name="BeltComponent" parent="." instance=ExtResource("2_kltsw")]
-pair_type = 1
-
-[node name="BeltComponent2" parent="." instance=ExtResource("2_kltsw")]
+num_pairs = 6

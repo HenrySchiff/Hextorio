@@ -8,8 +8,6 @@ var belt_components: Array[BeltComponent]
 static func new_entity(_item_type: ItemType) -> Entity:
 	var entity = _item_type.entity_scene.instantiate()
 	entity.item_type = _item_type
-	#entity.shape = Shape.new_shape(_item_type)
-	#entity.add_child(entity.shape)
 	return entity
 
 func _ready() -> void:
@@ -22,4 +20,7 @@ func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
 	self.tile_position = _tile_pos
 
 func _tile_update(_tilemap: HexTileMap) -> void:
+	pass
+
+func _inspect() -> void:
 	pass

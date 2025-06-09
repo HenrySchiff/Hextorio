@@ -57,23 +57,48 @@ BeltComponent extends Node2D
 | outputs: Array[TransportLinePair] // size of 6, initially all null
 |
 | (child nodes): TransportLinePairs+
+|
+| 
+| tile_update(tilemap: HexTileMap) -> void:
+|
+| set_pair
 
 TransportLinePair extends Node2D
 |
 | left_transport_line:  TransportLine
 | right_transport_line: TransportLine
+|
+| set_next_lines(next_pair: TransportLinePair) -> void
+| set_next_split_lines(next_pair: TransportLinePair) -> void
+|
+| // an input or output of -1 sets that end to the center
+| set_lines(input: int, output: int) -> void
+|
+| // called by set_lines:
+| set_lines_thirty
+| set_lines_sixty
+| set_lines_center
 
 
 TransportLine extends Path2D
 
 
+##################################################
+
+class_name EntityPlacer
+|
+| selected_item: ItemType
+| selected_item_shape: Shape
+|
+| mouse_pos: Vector2
+| current_tile: Vector2i
+| last_tile: Vector2i
+|
+| place(item_type: ItemType, tile_pos: Vector2i)
+|
+| remove(tile_pos: Vector2i)
 
 
-
-
-
-
-
-
-
-
+class_name BeltPlacer
+|
+|

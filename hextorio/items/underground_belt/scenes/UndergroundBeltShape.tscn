@@ -12,7 +12,7 @@ point_count = 2
 [node name="UndergroundBeltShape" type="Line2D"]
 clip_children = 2
 points = PackedVector2Array(-32, 0, 32, 0)
-width = 36.0
+width = 32.0
 default_color = Color(0.197937, 0.197937, 0.197937, 1)
 script = ExtResource("1_y0nrl")
 
@@ -45,6 +45,6 @@ polygon = PackedVector2Array(0, -8, 0, 8, 8, 0)
 [node name="Roof" type="Polygon2D" parent="."]
 z_index = 500
 color = Color(0.513233, 0.513233, 0.513233, 1)
-polygon = PackedVector2Array(-16, -18, 32, -18, 32, 18, -16, 18)
+polygon = PackedVector2Array(-16, -16, 32, -16, 32, 16, -16, 16)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
