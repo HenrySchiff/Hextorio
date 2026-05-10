@@ -130,3 +130,6 @@ func is_opposite_dir(a: HexDirection, b: HexDirection) -> bool:
 func is_adjacent_dir(a: HexDirection, b: HexDirection) -> bool:
 	var difference: int = posmod(a - b, 6)
 	return difference == 1 || difference == 5
+
+func get_dir_from_vec(vector: Vector2i) -> HexDirection:
+	return NEIGHBORS.find(vector)

@@ -11,6 +11,12 @@ static func new_shape(_item_type: ItemType) -> Shape:
 	shape.item_type = _item_type
 	return shape
 
+func _set_rotation_whole(input: int, output: int):
+	pass
+
+func _set_rotation_end(index: int):
+	pass
+
 func _rotate_whole(_direction: int):
 	pass
 	

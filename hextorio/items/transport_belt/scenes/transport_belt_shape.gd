@@ -46,15 +46,24 @@ func _copy(other: Shape):
 	self.output_index = other.output_index
 	self.update_belt_line()
 
-func _rotate_whole(direction: int):
-	output_index = posmod(output_index + direction, 6)
-	input_index = posmod(input_index + direction, 6)
+func _set_rotation_whole(input: int, output: int):
+	input_index = input
+	output_index = output
 	update_belt_line()
 
-func _rotate_end(direction: int):
-	output_index = posmod(output_index + direction, 6)
+func _set_rotation_end(index: int):
+	output_index = index
 	update_belt_line()
+
+func _rotate_whole(direction: int):
+	var new_input = posmod(input_index + direction, 6)
+	var new_output = posmod(output_index + direction, 6)
+	_set_rotation_whole(new_input, new_output)
 	
+func _rotate_end(direction: int):
+	var new_output = posmod(output_index + direction, 6)
+	_set_rotation_end(new_output)
+
 func _flip_horizontal():
 	input_index = posmod(3 - input_index, 6)
 	output_index = posmod(3 - output_index, 6)
@@ -74,9 +83,3 @@ func set_belt_line(line: PackedVector2Array):
 		if i == line.size() - 1:
 			point *= 7.0/4.0
 		$Path2D.curve.add_point(point)
-
-func sync_arrows(other_belt):
-	for i in range($Path2D.get_child_count()):
-		var arrow: PathFollow2D = $Path2D.get_child(i)
-		var other_arrow: PathFollow2D = other_belt.get_node("Path2D").get_child(i)
-		arrow.progress_ratio = other_arrow.progress_ratio

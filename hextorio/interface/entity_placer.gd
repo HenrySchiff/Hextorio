@@ -3,16 +3,19 @@ class_name EntityPlacer extends Node2D
 @onready var build_audio = $BuildAudioPlayer
 @onready var deconstruct_audio = $DeconstructAudioPlayer
 
-@onready var hotbar: Hotbar = get_node("../../CanvasLayer/Hotbar")
+@onready var hotbar: Hotbar = get_node("../CanvasLayer/Hotbar")
 @onready var tilemap: HexTileMap = get_node("../HexTileMap")
 
 var selected_item_type: ItemType
 var selected_item_shape: Shape
 
 var mouse_pos: Vector2
+
 var current_tile: Vector2i
 var last_tile: Vector2i
-var entity: Entity
+
+var current_entity: Entity
+var last_entity: Entity
 
 func select_item(item_type: ItemType) -> void:
 	selected_item_type = item_type
@@ -29,14 +32,38 @@ func select_item(item_type: ItemType) -> void:
 
 func _process(_delta: float) -> void:
 	mouse_pos = get_global_mouse_position()
-	last_tile = current_tile
-	current_tile = HexUtil.screen_to_hex(mouse_pos)
-	entity = tilemap.get_entity(current_tile)
+
+	var tile: Vector2i = HexUtil.screen_to_hex(mouse_pos)
+	
+	if tile != current_tile:
+		last_tile = current_tile
+		current_tile = tile
+	
+	var entity: Entity = tilemap.get_entity(current_tile)
+	
+	if entity != current_entity:
+		last_entity = current_entity
+		current_entity = entity
+	
+	if Input.is_action_pressed("place") && last_entity:
+		var dir: HexUtil.HexDirection = HexUtil.get_dir_from_vec(current_tile - last_tile)
+		var opp: HexUtil.HexDirection = HexUtil.get_opposite_dir(dir)
+		
+		if selected_item_shape:
+			selected_item_shape._set_rotation_whole(opp, dir)
+			
+		if last_entity:
+			last_entity.shape._set_rotation_end(dir)
+			last_entity._apply_shape(last_entity.shape)
+			last_entity._tile_update(tilemap)
+	else:
+		last_tile = current_tile
+		last_entity = null
 	
 	if Input.is_action_just_pressed("pipette"):
-		if entity:
-			select_item(entity.item_type)
-			selected_item_shape._copy(entity.shape)
+		if current_entity:
+			select_item(current_entity.item_type)
+			selected_item_shape._copy(current_entity.shape)
 		else:
 			select_item(null)
 	
@@ -44,19 +71,24 @@ func _process(_delta: float) -> void:
 		if tilemap.remove_entity(current_tile):
 			deconstruct_audio.position = mouse_pos
 			deconstruct_audio.play()
+			tilemap.update_neighbors(current_tile)
 			
 	if Input.is_action_just_pressed("rotate"):
 		var direction = -1 if Input.is_action_pressed("shift") else 1
-		var rotating_shape = entity.shape if entity else selected_item_shape
+		var rotating_shape = current_entity.shape if current_entity else selected_item_shape
 		
-		if !selected_item_type && !entity:
+		if !selected_item_type && !current_entity:
 			return
 		
 		if Input.is_action_pressed("control"):
 			rotating_shape._rotate_end(direction)
-			return
-			
-		rotating_shape._rotate_whole(direction)
+		else:
+			rotating_shape._rotate_whole(direction)
+		
+		if current_entity:
+			current_entity._apply_shape(current_entity.shape)
+			current_entity._tile_update(tilemap)
+			tilemap.update_neighbors(current_tile)
 	
 	
 	if !selected_item_type: 
@@ -83,7 +115,7 @@ func _process(_delta: float) -> void:
 		
 		var new_entity: Entity = Entity.new_entity(selected_item_type)
 		tilemap.set_entity(current_tile, new_entity)
-		new_entity._sync_shape(selected_item_shape, current_tile)
+		new_entity.sync_shape(selected_item_shape)
 		tilemap.set_entity_tiles(new_entity)
 		
 		new_entity._tile_update(tilemap)
@@ -98,8 +130,8 @@ func _process(_delta: float) -> void:
 			belt_comp.attempt_item_place(selected_item_type, mouse_pos)
 	
 	if Input.is_action_just_pressed("inspect"):
-		if entity:
-			entity._inspect()
+		if current_entity:
+			current_entity._inspect()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.keycode >= KEY_0 && event.keycode <= KEY_9:

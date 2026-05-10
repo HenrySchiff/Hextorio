@@ -34,7 +34,7 @@ func set_entity(pos: Vector2i, entity: Entity) -> void:
 	self.add_child(entity)
 	entity.tile_position = pos
 
-# This requires the entity to already have it's shape data, so it must be called after ._sync_shape()
+# This requires the entity to already have it's shape data, so it must be called after .sync_shape()
 func set_entity_tiles(entity: Entity) -> void:
 	for relative_pos in entity.shape.occupied_tiles:
 		var tile: Vector2i = entity.tile_position + relative_pos

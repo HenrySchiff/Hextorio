@@ -14,8 +14,8 @@ func _exit_tree() -> void:
 		related_underground.related_underground = null
 		related_underground = null
 	
-func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
-	super(_shape, _tile_pos)
+func _apply_shape(_shape: Shape) -> void:
+	super(_shape)
 	
 	var belt_shape: UndergroundBeltShape = _shape as UndergroundBeltShape
 	var input = belt_shape.input_index if belt_shape.is_entrance else -1

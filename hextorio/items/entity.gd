@@ -14,13 +14,19 @@ func _ready() -> void:
 	shape = Shape.new_shape(item_type)
 	add_child(shape)
 
-func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
+func sync_shape(_shape: Shape) -> void:
 	self.shape._copy(_shape)
 	self.position = _shape.position
-	self.tile_position = _tile_pos
+	self._apply_shape(_shape)
+
+# applies the configuration of a shape to an entity; for example, in TransportBelt,
+# this method will set the belt's lines based on the given shape's orientation
+func _apply_shape(_shape: Shape) -> void:
+	pass
 
 func _tile_update(_tilemap: HexTileMap) -> void:
 	pass
 
 func _inspect() -> void:
+	print("\n###### INSPECT ######")
 	pass

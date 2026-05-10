@@ -99,6 +99,11 @@ class_name EntityPlacer
 | remove(tile_pos: Vector2i)
 
 
-class_name BeltPlacer
-|
-|
+
+Three modes of placing:
+
+REGULAR: The entity's shape is manually oriented before being placed with a single click
+
+DRAG_AUTO: The entity's shape is automatically oriented based on the previously placed entity. This is activated when the mouse is held and dragged, i.e. when two entities are placed and the mouse was not released between their placements. This will mostly be used for belts.
+
+DRAG_STRAIGHT: 

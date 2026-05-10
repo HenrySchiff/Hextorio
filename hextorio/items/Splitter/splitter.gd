@@ -12,8 +12,8 @@ func _ready() -> void:
 	left_belt_comp.relative_position = Vector2i.ZERO
 	belt_components.append_array([left_belt_comp, right_belt_comp])
 
-func _sync_shape(_shape: Shape, _tile_pos: Vector2i) -> void:
-	super(_shape, _tile_pos)
+func _apply_shape(_shape: Shape) -> void:
+	super(_shape)
 	var splitter_shape: SplitterShape = _shape as SplitterShape
 	
 	right_belt_comp.position = splitter_shape.right_belt_shape.position

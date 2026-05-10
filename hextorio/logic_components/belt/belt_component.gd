@@ -56,26 +56,43 @@ func set_balancer_lines() -> void:
 		pair.set_lines(i, -1)
 		pair_map[i] = pair
 
+func reset_pairs() -> void:
+	pair_map.fill(null)
+	for pair in get_children():
+		pair.input_dir = -1
+		pair.output_dir = -1
+		pair.left_line.next_line = null
+		pair.right_line.next_line = null
+
+
 func set_belt_speed(speed: int) -> void:
 	for pair in get_children():
 		pair.set_belt_speed(speed)
 
 func accepts_input(input_index: HexUtil.HexDirection) -> bool:
-	return pair_map[input_index] && pair_map[input_index].input_dir != -1
+	return pair_map[input_index] && pair_map[input_index].input_dir == input_index
 
 func tile_update(tilemap: HexTileMap) -> void:
 	for i in range(6):
+		# make sure this pair exists and outputs in this direction
 		if !pair_map[i] || pair_map[i].output_dir != i: continue
 		
+		# reset its next lines
+		var pair: TransportLinePair = pair_map[i]
+		pair.left_line.next_line = null
+		pair.right_line.next_line = null
+		
+		# make sure there's a belt in the direction it outputs
 		var output_index: int = i
 		var next: BeltComponent = tilemap.get_neighbor_belt(tile_position, output_index)
-		
 		if !next: continue
 		
+		# make sure it accepts input from that direction
 		var opposite: int = HexUtil.get_opposite_dir(output_index)
 		if !next.accepts_input(opposite): continue
 		
-		pair_map[i].set_next_lines(next.pair_map[opposite])
+		# now set its next lines
+		pair.set_next_lines(next.pair_map[opposite])
 
 func attempt_item_place(_item_type: ItemType, point: Vector2) -> bool:
 	var local_point: Vector2 = point - global_position

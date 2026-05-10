@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcju3s11fa3ai"]
+[gd_scene load_steps=9 format=3 uid="uid://bcju3s11fa3ai"]
 
 [ext_resource type="Script" uid="uid://ciqwqe1mq5cnk" path="res://main.gd" id="1_go4p2"]
 [ext_resource type="Script" uid="uid://dxrbq5dsj6bld" path="res://tilemap.gd" id="3_hf0s6"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://by4nilec608lh" path="res://assets/audio/build-small.ogg" id="5_lquwl"]
 [ext_resource type="AudioStream" uid="uid://47cx0atktfxk" path="res://assets/audio/deconstruct-small.ogg" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dy8d1mmr0rffh" path="res://interface/Hotbar.tscn" id="6_y7ouh"]
+[ext_resource type="PackedScene" uid="uid://dy7a434l13fbk" path="res://interface/EntityPlacer.tscn" id="7_272bh"]
 
 [sub_resource type="GDScript" id="GDScript_lquwl"]
 script/source = "extends Label
@@ -48,3 +49,5 @@ volume_db = -15.0
 [node name="DeconstructAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7mycd")
 volume_db = -15.0
+
+[node name="EntityPlacer" parent="." instance=ExtResource("7_272bh")]
