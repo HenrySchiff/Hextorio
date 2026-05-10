@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://b1o7obwl32boe"]
+[gd_resource type="Resource" script_class="ItemType" format=3 uid="uid://b1o7obwl32boe"]
 
 [ext_resource type="PackedScene" uid="uid://gexdw5cvre8b" path="res://items/balancer/Balancer.tscn" id="1_xxwwx"]
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="2_m41xh"]

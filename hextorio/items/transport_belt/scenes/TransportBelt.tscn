@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3hrb4wlsklu7"]
+[gd_scene format=3 uid="uid://b3hrb4wlsklu7"]
 
 [ext_resource type="Script" uid="uid://boc1v6kxnt30y" path="res://items/transport_belt/scenes/transport_belt.gd" id="1_cwk5p"]
 [ext_resource type="PackedScene" uid="uid://ceodajnf2cas7" path="res://logic_components/belt/BeltComponent.tscn" id="2_76pjw"]
 
-[node name="TransportBelt" type="Node2D"]
+[node name="TransportBelt" type="Node2D" unique_id=188847837]
 script = ExtResource("1_cwk5p")
 
-[node name="BeltComponent" parent="." instance=ExtResource("2_76pjw")]
+[node name="BeltComponent" parent="." unique_id=435786898 instance=ExtResource("2_76pjw")]

@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cklbl5ii75lw5"]
+[gd_scene format=3 uid="uid://cklbl5ii75lw5"]
 
 [ext_resource type="Script" uid="uid://cgfagfol10isf" path="res://items/splitter/splitter_shape.gd" id="1_srr6d"]
 
-[node name="SplitterShape" type="Node2D"]
+[node name="SplitterShape" type="Node2D" unique_id=410318357]
 z_index = 5
 z_as_relative = false
 script = ExtResource("1_srr6d")
 
-[node name="Rectangle" type="Polygon2D" parent="."]
+[node name="Rectangle" type="Polygon2D" parent="." unique_id=287074888]
 z_index = 300
 z_as_relative = false
 color = Color(0.513233, 0.513233, 0.513233, 1)

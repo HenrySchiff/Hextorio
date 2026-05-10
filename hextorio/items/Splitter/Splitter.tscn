@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c322y8ik0ncqs"]
+[gd_scene format=3 uid="uid://c322y8ik0ncqs"]
 
 [ext_resource type="Script" uid="uid://brh34mgac62ay" path="res://items/splitter/splitter.gd" id="1_86umy"]
 [ext_resource type="PackedScene" uid="uid://ceodajnf2cas7" path="res://logic_components/belt/BeltComponent.tscn" id="3_fn0sj"]
 
-[node name="Splitter" type="Node2D"]
+[node name="Splitter" type="Node2D" unique_id=1659118842]
 script = ExtResource("1_86umy")
 
-[node name="LeftBeltComponent" parent="." instance=ExtResource("3_fn0sj")]
+[node name="LeftBeltComponent" parent="." unique_id=1692835539 instance=ExtResource("3_fn0sj")]
 num_pairs = 2
 
-[node name="RightBeltComponent" parent="." instance=ExtResource("3_fn0sj")]
+[node name="RightBeltComponent" parent="." unique_id=2139274099 instance=ExtResource("3_fn0sj")]
 num_pairs = 2

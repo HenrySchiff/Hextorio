@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcju3s11fa3ai"]
+[gd_scene format=3 uid="uid://bcju3s11fa3ai"]
 
 [ext_resource type="Script" uid="uid://ciqwqe1mq5cnk" path="res://main.gd" id="1_go4p2"]
 [ext_resource type="Script" uid="uid://dxrbq5dsj6bld" path="res://tilemap.gd" id="3_hf0s6"]
@@ -15,23 +15,23 @@ func _process(_delta: float) -> void:
 	text = \"FPS: %d\" % Engine.get_frames_per_second()
 "
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=431075842]
 script = ExtResource("1_go4p2")
 
-[node name="Background" type="Polygon2D" parent="."]
+[node name="Background" type="Polygon2D" parent="." unique_id=814095718]
 color = Color(0.64, 0.5344, 0.352, 1)
 polygon = PackedVector2Array(-3000, -3000, 3000, -3000, 3000, 3000, -3000, 3000)
 
-[node name="HexTileMap" type="Node2D" parent="."]
+[node name="HexTileMap" type="Node2D" parent="." unique_id=1787694726]
 texture_filter = 3
 script = ExtResource("3_hf0s6")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1692803371]
 script = ExtResource("4_aeycg")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1957276744]
 
-[node name="FPSLabel" type="Label" parent="CanvasLayer"]
+[node name="FPSLabel" type="Label" parent="CanvasLayer" unique_id=2076039069]
 texture_filter = 2
 offset_left = 7.0
 offset_right = 61.0
@@ -40,14 +40,14 @@ theme_override_font_sizes/font_size = 24
 text = "FPS: "
 script = SubResource("GDScript_lquwl")
 
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("6_y7ouh")]
+[node name="Hotbar" parent="CanvasLayer" unique_id=1617970301 instance=ExtResource("6_y7ouh")]
 
-[node name="BuildAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="BuildAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1780561052]
 stream = ExtResource("5_lquwl")
 volume_db = -15.0
 
-[node name="DeconstructAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="DeconstructAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1426160125]
 stream = ExtResource("6_7mycd")
 volume_db = -15.0
 
-[node name="EntityPlacer" parent="." instance=ExtResource("7_272bh")]
+[node name="EntityPlacer" parent="." unique_id=1643139030 instance=ExtResource("7_272bh")]

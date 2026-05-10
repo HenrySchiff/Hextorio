@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bp6bfuv1qrhqe"]
 
-[node name="Dot" type="Polygon2D"]
+[node name="Dot" type="Polygon2D" unique_id=1115310076]
 z_index = 200
 z_as_relative = false
 scale = Vector2(0.1, 0.1)

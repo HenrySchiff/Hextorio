@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://3oqwwuwr5eii"]
+[gd_resource type="Resource" script_class="ItemType" format=3 uid="uid://3oqwwuwr5eii"]
 
 [ext_resource type="PackedScene" uid="uid://dqwgmxjshw7n2" path="res://items/underground_belt/scenes/UndergroundBelt.tscn" id="1_yofrl"]
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="2_mo1di"]

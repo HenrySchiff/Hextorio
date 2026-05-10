@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://cwrbkydmqd35u"]
+[gd_resource type="Resource" script_class="ItemType" format=3 uid="uid://cwrbkydmqd35u"]
 
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_7bo1t"]
 [ext_resource type="PackedScene" uid="uid://d20l7r60ye42d" path="res://items/assembling_machine/AssemblingMachine.tscn" id="1_lkk7i"]

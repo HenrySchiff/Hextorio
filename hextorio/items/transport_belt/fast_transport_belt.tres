@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemType" load_steps=5 format=3 uid="uid://10txel6t8ie6"]
+[gd_resource type="Resource" script_class="ItemType" format=3 uid="uid://10txel6t8ie6"]
 
 [ext_resource type="PackedScene" uid="uid://b3hrb4wlsklu7" path="res://items/transport_belt/scenes/TransportBelt.tscn" id="1_11afv"]
 [ext_resource type="Script" uid="uid://51j7l6mrgks3" path="res://items/item_type.gd" id="1_fo6tb"]

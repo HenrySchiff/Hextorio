@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://gexdw5cvre8b"]
+[gd_scene format=3 uid="uid://gexdw5cvre8b"]
 
 [ext_resource type="Script" uid="uid://c3t0nprxmxw3a" path="res://items/balancer/balancer.gd" id="1_0tr7m"]
 [ext_resource type="PackedScene" uid="uid://ceodajnf2cas7" path="res://logic_components/belt/BeltComponent.tscn" id="2_kltsw"]
 
-[node name="Balancer" type="Node2D"]
+[node name="Balancer" type="Node2D" unique_id=2036767114]
 script = ExtResource("1_0tr7m")
 
-[node name="BeltComponent" parent="." instance=ExtResource("2_kltsw")]
+[node name="BeltComponent" parent="." unique_id=608601016 instance=ExtResource("2_kltsw")]
 num_pairs = 6
